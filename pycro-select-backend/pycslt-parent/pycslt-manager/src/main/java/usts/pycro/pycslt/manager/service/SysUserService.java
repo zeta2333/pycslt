@@ -18,4 +18,17 @@ public interface SysUserService extends IService<SysUser> {
      * @return
      */
     LoginVo login(LoginDto loginDto);
+
+    /**
+     * 获取当前登录用户信息
+     * @param token
+     * @return
+     */
+    SysUser getUserInfo(String token);
+
+    /**
+     * 当前用户退出
+     * @param token
+     */
+    void logout(String token);
 }

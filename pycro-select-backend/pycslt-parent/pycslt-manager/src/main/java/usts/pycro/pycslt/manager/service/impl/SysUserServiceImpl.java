@@ -1,6 +1,7 @@
 package usts.pycro.pycslt.manager.service.impl;
 
 import cn.hutool.core.lang.UUID;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.alibaba.fastjson.JSON;
 import com.mybatisflex.core.query.QueryWrapper;
@@ -15,6 +16,7 @@ import usts.pycro.pycslt.model.dto.system.LoginDto;
 import usts.pycro.pycslt.model.entity.system.SysUser;
 import usts.pycro.pycslt.model.vo.common.ResultCodeEnum;
 import usts.pycro.pycslt.model.vo.system.LoginVo;
+import usts.pycro.pycslt.enums.RedisKeyEnum;
 
 import java.util.concurrent.TimeUnit;
 
@@ -39,6 +41,20 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      */
     @Override
     public LoginVo login(LoginDto loginDto) {
+        // 验证码校验
+        // 1.从loginDto获取验证码的值和redis对应的key
+        String inputCaptcha = loginDto.getCaptcha();
+        String codeKey = loginDto.getCodeKey();
+        // 2.根据key从redis中查询验证码的值
+        String dbCaptcha = redisTemplate.opsForValue()
+                .get(RedisKeyEnum.USER_VALIDATE.getValue() + codeKey);
+        // 3.比较输入的验证码和redis存储的值是否一致
+        // 4.不一致：提示验证码输出错误
+        if (StrUtil.isEmpty(dbCaptcha) || !StrUtil.equalsIgnoreCase(dbCaptcha, inputCaptcha)) {
+            throw new ServiceException(ResultCodeEnum.VALIDATE_CODE_ERROR);
+        }
+        // 5.一致：删除redis中的key，进行后续操作
+        redisTemplate.delete(RedisKeyEnum.USER_VALIDATE.getValue() + codeKey);
         // 1. 获取提交的用户名
         String userName = loginDto.getUserName();
         // 2. 根据用户名查询用户表
@@ -65,12 +81,35 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         // 8. 把登陆成功的用户信息存放到redis中
         // key:token  value:用户信息
         redisTemplate.opsForValue()
-                .set("user:login:" + token,
+                .set(RedisKeyEnum.USER_LOGIN.getValue() + token,
                         JSON.toJSONString(sysUser),
                         7, TimeUnit.DAYS);
         // 9. 返回loginVo对象
         LoginVo loginVo = new LoginVo();
         loginVo.setToken(token);
         return loginVo;
+    }
+
+    /**
+     * 获取当前登录用户信息
+     *
+     * @param token
+     * @return
+     */
+    @Override
+    public SysUser getUserInfo(String token) {
+        String userJson = redisTemplate.opsForValue().get(RedisKeyEnum.USER_LOGIN.getValue() + token);
+        System.out.println("userJson:" + userJson);
+        return JSON.parseObject(userJson, SysUser.class);
+    }
+
+    /**
+     * 当前用户退出
+     *
+     * @param token
+     */
+    @Override
+    public void logout(String token) {
+        redisTemplate.delete(RedisKeyEnum.USER_LOGIN.getValue() + token);
     }
 }

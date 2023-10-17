@@ -17,6 +17,7 @@ public class LoginDto {
     private String password;
 
     @Schema(description = "提交验证码")
+    @NotNull(message = "验证码不能为空")
     private String captcha;
 
     @Schema(description = "验证码key")

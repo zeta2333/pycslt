@@ -1,8 +1,12 @@
 package usts.pycro.pycslt.manager.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import usts.pycro.pycslt.manager.interceptor.LoginAuthInterceptor;
+import usts.pycro.pycslt.manager.properties.ApplicationProperties;
 
 /**
  * @author Pycro
@@ -11,6 +15,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Component
 public class WebMvcConfiguration implements WebMvcConfigurer {
+
+    @Autowired
+    private LoginAuthInterceptor loginAuthInterceptor;
+    @Autowired
+    private ApplicationProperties properties;
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(loginAuthInterceptor)
+                .excludePathPatterns(properties.getNoAuthUrls())
+                .addPathPatterns("/**");
+    }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
