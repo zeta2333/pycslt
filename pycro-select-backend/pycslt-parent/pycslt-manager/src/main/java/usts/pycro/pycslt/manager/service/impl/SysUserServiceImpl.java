@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import usts.pycro.pycslt.common.exception.ServiceException;
 import usts.pycro.pycslt.manager.mapper.SysUserMapper;
 import usts.pycro.pycslt.manager.service.SysUserService;
-import usts.pycro.pycslt.model.dto.system.LoginDto;
+import usts.pycro.pycslt.model.dto.system.LoginBo;
 import usts.pycro.pycslt.model.entity.system.SysUser;
 import usts.pycro.pycslt.model.vo.common.ResultCodeEnum;
 import usts.pycro.pycslt.model.vo.system.LoginVo;
@@ -36,15 +36,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     /**
      * 用户登录
      *
-     * @param loginDto
+     * @param loginBo
      * @return
      */
     @Override
-    public LoginVo login(LoginDto loginDto) {
+    public LoginVo login(LoginBo loginBo) {
         // 验证码校验
         // 1.从loginDto获取验证码的值和redis对应的key
-        String inputCaptcha = loginDto.getCaptcha();
-        String codeKey = loginDto.getCodeKey();
+        String inputCaptcha = loginBo.getCaptcha();
+        String codeKey = loginBo.getCodeKey();
         // 2.根据key从redis中查询验证码的值
         String dbCaptcha = redisTemplate.opsForValue()
                 .get(RedisKeyEnum.USER_VALIDATE.getValue() + codeKey);
@@ -56,7 +56,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         // 5.一致：删除redis中的key，进行后续操作
         redisTemplate.delete(RedisKeyEnum.USER_VALIDATE.getValue() + codeKey);
         // 1. 获取提交的用户名
-        String userName = loginDto.getUserName();
+        String userName = loginBo.getUserName();
         // 2. 根据用户名查询用户表
         SysUser sysUser = mapper.selectOneByQuery(
                 QueryWrapper.create()
@@ -71,7 +71,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         // 5. 比较用户输入的密码和数据库保存的密码是否一致
         String passwordDatabase = sysUser.getPassword();
         // 对输入的密码进行加密再比较
-        String passwordInput = DigestUtil.sha256Hex(loginDto.getPassword());
+        String passwordInput = DigestUtil.sha256Hex(loginBo.getPassword());
         // 6. 密码不一致：登录失败
         if (!passwordInput.equals(passwordDatabase)) {
             throw new ServiceException(ResultCodeEnum.LOGIN_ERROR);

@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Schema(description = "请求参数实体类")
-public class SysOperLogDto {
+public class SysOperLogBo {
 
     @Schema(description = "模块名称")
     private String title;

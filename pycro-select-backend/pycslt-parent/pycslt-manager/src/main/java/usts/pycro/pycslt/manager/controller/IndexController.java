@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import usts.pycro.pycslt.manager.service.SysUserService;
 import usts.pycro.pycslt.manager.service.ValidateCodeService;
-import usts.pycro.pycslt.model.dto.system.LoginDto;
+import usts.pycro.pycslt.model.dto.system.LoginBo;
 import usts.pycro.pycslt.model.entity.system.SysUser;
 import usts.pycro.pycslt.model.vo.common.Result;
 import usts.pycro.pycslt.model.vo.system.LoginVo;
@@ -30,6 +30,12 @@ public class IndexController {
     @Autowired
     private ValidateCodeService validateCodeService;
 
+    /**
+     * 用户登出
+     *
+     * @param token
+     * @return
+     */
     @GetMapping("/logout")
     public Result<?> logout(@RequestHeader(name = "token") String token) {
         sysUserService.logout(token);
@@ -63,13 +69,13 @@ public class IndexController {
     /**
      * 登录
      *
-     * @param loginDto
+     * @param loginBo
      * @return
      */
     @Operation(summary = "登录接口")
     @PostMapping(value = "/login")
-    public Result<LoginVo> login(@RequestBody @Valid LoginDto loginDto) {
-        LoginVo loginVo = sysUserService.login(loginDto);
+    public Result<LoginVo> login(@RequestBody @Valid LoginBo loginBo) {
+        LoginVo loginVo = sysUserService.login(loginBo);
         return Result.ok(loginVo);
     }
 

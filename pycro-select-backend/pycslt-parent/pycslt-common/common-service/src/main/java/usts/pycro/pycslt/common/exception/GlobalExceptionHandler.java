@@ -16,12 +16,22 @@ import usts.pycro.pycslt.model.vo.common.ResultCodeEnum;
 @Slf4j
 public class GlobalExceptionHandler {
 
+    /**
+     * 全局异常处理
+     * @param e
+     * @return
+     */
     @ExceptionHandler(Exception.class)
     public Result<?> error(Exception e) {
         log.error(e.getMessage());
         return Result.build(null, ResultCodeEnum.SYSTEM_ERROR);
     }
 
+    /**
+     * 自定义异常处理
+     * @param e
+     * @return
+     */
     @ExceptionHandler(ServiceException.class)
     public Result<?> error(ServiceException e) {
         log.error(e.getMessage());

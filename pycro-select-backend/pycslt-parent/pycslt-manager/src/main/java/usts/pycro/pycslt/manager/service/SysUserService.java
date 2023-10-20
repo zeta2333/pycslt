@@ -1,7 +1,7 @@
 package usts.pycro.pycslt.manager.service;
 
 import com.mybatisflex.core.service.IService;
-import usts.pycro.pycslt.model.dto.system.LoginDto;
+import usts.pycro.pycslt.model.dto.system.LoginBo;
 import usts.pycro.pycslt.model.entity.system.SysUser;
 import usts.pycro.pycslt.model.vo.system.LoginVo;
 
@@ -14,10 +14,10 @@ public interface SysUserService extends IService<SysUser> {
 
     /**
      * 用户登录
-     * @param loginDto
+     * @param loginBo
      * @return
      */
-    LoginVo login(LoginDto loginDto);
+    LoginVo login(LoginBo loginBo);
 
     /**
      * 获取当前登录用户信息

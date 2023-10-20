@@ -21,6 +21,10 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     @Autowired
     private ApplicationProperties properties;
 
+    /**
+     * 配置请求拦截器
+     * @param registry
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginAuthInterceptor)
@@ -28,6 +32,10 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                 .addPathPatterns("/**");
     }
 
+    /**
+     * 跨域问题处理
+     * @param registry
+     */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")      // 添加路径规则
