@@ -1,7 +1,9 @@
 package usts.pycro.pycslt.manager.service;
 
+import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.service.IService;
 import usts.pycro.pycslt.model.dto.system.LoginBo;
+import usts.pycro.pycslt.model.dto.system.SysUserBo;
 import usts.pycro.pycslt.model.entity.system.SysUser;
 import usts.pycro.pycslt.model.vo.system.LoginVo;
 
@@ -31,4 +33,12 @@ public interface SysUserService extends IService<SysUser> {
      * @param token
      */
     void logout(String token);
+
+    /**
+     * 条件分页查询
+     * @param page
+     * @param sysUserBo
+     * @return
+     */
+    Page<SysUser> pageQuery(Page<SysUser> page, SysUserBo sysUserBo);
 }

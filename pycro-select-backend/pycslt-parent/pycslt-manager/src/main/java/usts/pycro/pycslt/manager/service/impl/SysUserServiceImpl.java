@@ -4,6 +4,7 @@ import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.alibaba.fastjson.JSON;
+import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import usts.pycro.pycslt.common.exception.ServiceException;
 import usts.pycro.pycslt.manager.mapper.SysUserMapper;
 import usts.pycro.pycslt.manager.service.SysUserService;
 import usts.pycro.pycslt.model.dto.system.LoginBo;
+import usts.pycro.pycslt.model.dto.system.SysUserBo;
 import usts.pycro.pycslt.model.entity.system.SysUser;
 import usts.pycro.pycslt.model.vo.common.ResultCodeEnum;
 import usts.pycro.pycslt.model.vo.system.LoginVo;
@@ -101,6 +103,27 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         String userJson = redisTemplate.opsForValue().get(RedisKeyEnum.USER_LOGIN.getValue() + token);
         System.out.println("userJson:" + userJson);
         return JSON.parseObject(userJson, SysUser.class);
+    }
+
+    /**
+     * 条件分页查询
+     *
+     * @param page
+     * @param sysUserBo
+     * @return
+     */
+    @Override
+    public Page<SysUser> pageQuery(Page<SysUser> page, SysUserBo sysUserBo) {
+        String keyword = sysUserBo.getKeyword();
+        String createTimeBegin = sysUserBo.getCreateTimeBegin();
+        String createTimeEnd = sysUserBo.getCreateTimeEnd();
+        QueryWrapper wrapper = QueryWrapper.create()
+                .select(SYS_USER.DEFAULT_COLUMNS)
+                .where(SYS_USER.USER_NAME.like(keyword, StrUtil.isNotBlank(keyword)))
+                .and(SYS_USER.CREATE_TIME.ge(createTimeBegin, StrUtil.isNotBlank(createTimeBegin)))
+                .and(SYS_USER.CREATE_TIME.le(createTimeEnd, StrUtil.isNotBlank(createTimeEnd)))
+                .orderBy(SYS_USER.ID, true);
+        return mapper.paginate(page, wrapper);
     }
 
     /**

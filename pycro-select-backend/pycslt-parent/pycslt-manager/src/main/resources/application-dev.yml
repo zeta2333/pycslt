@@ -26,6 +26,7 @@ mybatis-flex:
 app:
   auth:
     noAuthUrls:
+      - /doc.html
       - /admin/system/index/login
       - /admin/system/index/generateValidateCode
   mysql:
