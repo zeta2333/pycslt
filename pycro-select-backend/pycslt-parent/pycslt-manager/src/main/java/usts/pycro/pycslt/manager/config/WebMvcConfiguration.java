@@ -23,6 +23,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
     /**
      * 配置请求拦截器
+     *
      * @param registry
      */
     @Override
@@ -34,6 +35,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
     /**
      * 跨域问题处理
+     *
      * @param registry
      */
     @Override

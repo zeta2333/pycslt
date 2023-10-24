@@ -106,6 +106,51 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     /**
+     * 修改用户
+     *
+     * @param sysUser
+     */
+    @Override
+    public void updateUser(SysUser sysUser) {
+        // 重名判断
+        SysUser dbUser = getOne(QueryWrapper.create()
+                .where(SYS_USER.USER_NAME.eq(sysUser.getUserName())));
+        if (dbUser != null && !dbUser.getId().equals(sysUser.getId())) {
+            throw new ServiceException(ResultCodeEnum.USER_NAME_IS_EXISTS);
+        }
+        // 密码置空，此处不可修改密码  -->  修改密码单独放到另一个方法中
+        sysUser.setPassword(null);
+        // 修改
+        updateById(sysUser);
+    }
+
+    /**
+     * 添加用户
+     *
+     * @param sysUser
+     */
+    @Override
+    public void saveUser(SysUser sysUser) {
+        // 用户名非空校验
+        String userName = sysUser.getUserName();
+        if (StrUtil.isBlank(userName)) {
+            throw new ServiceException("用户名不能为空");
+        }
+        // 用户名重名校验
+        long repeatCnt = count(QueryWrapper.create()
+                .select(SYS_USER.ID)
+                .where(SYS_USER.USER_NAME.eq(userName))
+        );
+        if (repeatCnt > 0) {
+            throw new ServiceException(ResultCodeEnum.USER_NAME_IS_EXISTS);
+        }
+        // 密码加密
+        sysUser.setPassword(DigestUtil.sha256Hex(sysUser.getPassword()));
+        // 添加
+        save(sysUser);
+    }
+
+    /**
      * 条件分页查询
      *
      * @param page
@@ -115,13 +160,16 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public Page<SysUser> pageQuery(Page<SysUser> page, SysUserBo sysUserBo) {
         String keyword = sysUserBo.getKeyword();
+        if (keyword != null) {
+            keyword = keyword.trim();
+        }
         String createTimeBegin = sysUserBo.getCreateTimeBegin();
         String createTimeEnd = sysUserBo.getCreateTimeEnd();
         QueryWrapper wrapper = QueryWrapper.create()
                 .select(SYS_USER.DEFAULT_COLUMNS)
-                .where(SYS_USER.USER_NAME.like(keyword, StrUtil.isNotBlank(keyword)))
-                .and(SYS_USER.CREATE_TIME.ge(createTimeBegin, StrUtil.isNotBlank(createTimeBegin)))
-                .and(SYS_USER.CREATE_TIME.le(createTimeEnd, StrUtil.isNotBlank(createTimeEnd)))
+                .where(SYS_USER.USER_NAME.like(keyword, StrUtil.isNotEmpty(keyword)))
+                .and(SYS_USER.CREATE_TIME.ge(createTimeBegin, StrUtil.isNotEmpty(createTimeBegin)))
+                .and(SYS_USER.CREATE_TIME.le(createTimeEnd, StrUtil.isNotEmpty(createTimeEnd)))
                 .orderBy(SYS_USER.ID, true);
         return mapper.paginate(page, wrapper);
     }

@@ -16,6 +16,7 @@ public interface SysUserService extends IService<SysUser> {
 
     /**
      * 用户登录
+     *
      * @param loginBo
      * @return
      */
@@ -23,6 +24,7 @@ public interface SysUserService extends IService<SysUser> {
 
     /**
      * 获取当前登录用户信息
+     *
      * @param token
      * @return
      */
@@ -30,15 +32,31 @@ public interface SysUserService extends IService<SysUser> {
 
     /**
      * 当前用户退出
+     *
      * @param token
      */
     void logout(String token);
 
     /**
      * 条件分页查询
+     *
      * @param page
      * @param sysUserBo
      * @return
      */
     Page<SysUser> pageQuery(Page<SysUser> page, SysUserBo sysUserBo);
+
+    /**
+     * 添加用户
+     *
+     * @param sysUser
+     */
+    void saveUser(SysUser sysUser);
+
+    /**
+     * 修改用户
+     *
+     * @param sysUser
+     */
+    void updateUser(SysUser sysUser);
 }
