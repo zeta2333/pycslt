@@ -1,12 +1,12 @@
 package usts.pycro.pycslt.model.entity.order;
 
-import usts.pycro.pycslt.model.entity.base.BaseEntity;
+import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
 @Schema(description = "订单日志实体对象")
-public class OrderLog extends BaseEntity {
+public class OrderLog extends BaseLogicEntity {
 
    private static final long serialVersionUID = 1L;
 

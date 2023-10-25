@@ -29,7 +29,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginAuthInterceptor)
-                .excludePathPatterns(properties.getNoAuthUrls())
+                .excludePathPatterns(properties.getAuth().getNoAuthUrls())
                 .addPathPatterns("/**");
     }
 

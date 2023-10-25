@@ -1,6 +1,6 @@
 package usts.pycro.pycslt.model.entity.product;
 
-import usts.pycro.pycslt.model.entity.base.BaseEntity;
+import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Schema(description = "分类实体类")
-public class Category extends BaseEntity {
+public class Category extends BaseLogicEntity {
 
 	@Schema(description = "分类名称")
 	private String name;

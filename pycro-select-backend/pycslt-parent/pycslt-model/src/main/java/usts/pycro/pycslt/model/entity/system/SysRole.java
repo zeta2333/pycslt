@@ -2,14 +2,14 @@ package usts.pycro.pycslt.model.entity.system;
 
 import com.mybatisflex.annotation.Column;
 import com.mybatisflex.annotation.Table;
-import usts.pycro.pycslt.model.entity.base.BaseEntity;
+import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
 @Schema(description = "角色实体类")
 @Table("sys_role")
-public class SysRole extends BaseEntity {
+public class SysRole extends BaseLogicEntity {
 
     private static final long serialVersionUID = 1L;
 

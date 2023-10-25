@@ -1,6 +1,6 @@
 package usts.pycro.pycslt.model.entity.order;
 
-import usts.pycro.pycslt.model.entity.base.BaseEntity;
+import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 @Data
 @Schema(description = "订单项实体类")
-public class OrderItem extends BaseEntity {
+public class OrderItem extends BaseLogicEntity {
 
    private static final long serialVersionUID = 1L;
 

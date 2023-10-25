@@ -1,6 +1,6 @@
 package usts.pycro.pycslt.model.entity.user;
 
-import usts.pycro.pycslt.model.entity.base.BaseEntity;
+import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 @Schema(description = "用户实体类")
-public class UserInfo extends BaseEntity {
+public class UserInfo extends BaseLogicEntity {
 
    private static final long serialVersionUID = 1L;
 

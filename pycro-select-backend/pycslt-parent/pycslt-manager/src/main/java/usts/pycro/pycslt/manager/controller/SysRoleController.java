@@ -4,9 +4,12 @@ import com.mybatisflex.core.paginate.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import usts.pycro.pycslt.manager.service.SysRoleService;
+import usts.pycro.pycslt.manager.service.SysUserRoleService;
 import usts.pycro.pycslt.model.dto.system.SysRoleBo;
 import usts.pycro.pycslt.model.entity.system.SysRole;
 import usts.pycro.pycslt.model.vo.common.Result;
+
+import java.util.List;
 
 /**
  * @author Pycro
@@ -19,6 +22,37 @@ public class SysRoleController {
     @Autowired
     private SysRoleService sysRoleService;
 
+    @Autowired
+    private SysUserRoleService sysUserRoleService;
+
+    /**
+     * 查询用户已分配的角色id
+     * @param userId
+     * @return
+     */
+    @GetMapping("/getAssignedRoles/{userId}")
+    public Result<List<Long>> getAssignedRoles(@PathVariable("userId") Long userId) {
+        List<Long> list = sysUserRoleService.getAssignedRoles(userId);
+        return Result.ok(list);
+    }
+
+    /**
+     * 查询所有角色
+     *
+     * @return
+     */
+    @GetMapping("/getAllRoles")
+    public Result<List<SysRole>> getAllRoles() {
+        List<SysRole> roles = sysRoleService.list();
+        return Result.ok(roles);
+    }
+
+    /**
+     * 根据id删除
+     *
+     * @param id
+     * @return
+     */
     @DeleteMapping("/deleteById/{id}")
     public Result<?> deleteById(@PathVariable("id") Long id) {
         sysRoleService.removeById(id);

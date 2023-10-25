@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Schema(description = "产品单元实体类")
-public class ProductUnit extends BaseEntity {
+public class ProductUnit extends BaseLogicEntity {
 
 	@Schema(description = "名称")
 	private String name;

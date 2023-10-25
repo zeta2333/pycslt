@@ -35,7 +35,7 @@
 <template>
   <div class="brand">
     <img class="logo" src="~@/assets/logo.svg" @click="goHome" />
-    <div class="title">Vue3 Element Admin</div>
+    <div class="title">PYCSLT BACK END</div>
   </div>
 </template>
 <script>

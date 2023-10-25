@@ -18,4 +18,6 @@ public interface SysRoleService extends IService<SysRole> {
      * @return
      */
     Page<SysRole> pageQuery(Page<SysRole> page, SysRoleBo sysRoleBo);
+
+
 }

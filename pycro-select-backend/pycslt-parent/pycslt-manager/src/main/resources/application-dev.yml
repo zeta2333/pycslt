@@ -13,7 +13,10 @@ spring:
     redis:
       host: ${app.redis.host}
       port: ${app.redis.port}
-
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
 # mybatis的配置
 mybatis:
   config-location: classpath:/mybatis-config.xml
@@ -24,9 +27,13 @@ mybatis-flex:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 app:
+  minio:
+    endpoint-url: http://centos:9000
+    access-key: admin
+    secret-key: 12345678
+    bucket-name: pycslt-bucket
   auth:
-    noAuthUrls:
-      - /doc.html/**
+    no-auth-urls:
       - /admin/system/index/login
       - /admin/system/index/generateValidateCode
   mysql:

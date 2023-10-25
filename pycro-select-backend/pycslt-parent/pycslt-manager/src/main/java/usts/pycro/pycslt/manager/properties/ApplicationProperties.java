@@ -1,6 +1,8 @@
 package usts.pycro.pycslt.manager.properties;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
@@ -11,9 +13,25 @@ import java.util.List;
  * 2023-10-17 16:28
  */
 @Data
-@ConfigurationProperties(prefix = "app.auth")
+@ConfigurationProperties(prefix = "app")
 public class ApplicationProperties {
 
-    private List<String> noAuthUrls;
+    private Auth auth;
+    private Minio minio;
 
+
+    @Getter
+    @Setter
+    public static class Minio {
+        private String endpointUrl;
+        private String accessKey;
+        private String secretKey;
+        private String bucketName;
+    }
+
+    @Getter
+    @Setter
+    public static class Auth {
+        private List<String> noAuthUrls;
+    }
 }

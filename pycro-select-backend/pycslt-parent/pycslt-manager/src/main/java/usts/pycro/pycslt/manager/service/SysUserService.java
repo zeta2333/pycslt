@@ -2,6 +2,7 @@ package usts.pycro.pycslt.manager.service;
 
 import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.service.IService;
+import usts.pycro.pycslt.model.dto.system.AssignRoleBo;
 import usts.pycro.pycslt.model.dto.system.LoginBo;
 import usts.pycro.pycslt.model.dto.system.SysUserBo;
 import usts.pycro.pycslt.model.entity.system.SysUser;
@@ -59,4 +60,11 @@ public interface SysUserService extends IService<SysUser> {
      * @param sysUser
      */
     void updateUser(SysUser sysUser);
+
+    /**
+     * 用户分配角色
+     *
+     * @param assignRoleBo
+     */
+    void doAssign(AssignRoleBo assignRoleBo);
 }

@@ -4,9 +4,11 @@ import cn.hutool.core.util.StrUtil;
 import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import usts.pycro.pycslt.manager.mapper.SysRoleMapper;
 import usts.pycro.pycslt.manager.service.SysRoleService;
+import usts.pycro.pycslt.manager.service.SysUserRoleService;
 import usts.pycro.pycslt.model.dto.system.SysRoleBo;
 import usts.pycro.pycslt.model.entity.system.SysRole;
 
@@ -19,6 +21,11 @@ import static usts.pycro.pycslt.model.entity.system.table.SysRoleTableDef.SYS_RO
  */
 @Service
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements SysRoleService {
+
+    @Autowired
+    private SysUserRoleService sysUserRoleService;
+
+
     /**
      * 分页查询
      *

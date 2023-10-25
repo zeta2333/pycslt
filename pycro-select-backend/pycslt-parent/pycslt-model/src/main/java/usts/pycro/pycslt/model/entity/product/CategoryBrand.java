@@ -1,12 +1,12 @@
 package usts.pycro.pycslt.model.entity.product;
 
-import usts.pycro.pycslt.model.entity.base.BaseEntity;
+import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
 @Schema(description = "分类品牌实体类")
-public class CategoryBrand extends BaseEntity {
+public class CategoryBrand extends BaseLogicEntity {
 
 	@Schema(description = "品牌id")
 	private Long brandId;

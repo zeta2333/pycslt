@@ -1,12 +1,12 @@
 package usts.pycro.pycslt.model.entity.product;
 
-import usts.pycro.pycslt.model.entity.base.BaseEntity;
+import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
 @Schema(description = "商品规格实体类")
-public class ProductSpec extends BaseEntity {
+public class ProductSpec extends BaseLogicEntity {
 
 	@Schema(description = "规格名称")
 	private String specName;   // 规格名称

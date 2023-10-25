@@ -1,12 +1,12 @@
 package usts.pycro.pycslt.model.entity.system;
 
-import usts.pycro.pycslt.model.entity.base.BaseEntity;
+import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
 @Schema(description = "SysOperLog")
-public class SysOperLog extends BaseEntity {
+public class SysOperLog extends BaseLogicEntity {
 
 	private static final long serialVersionUID = 1L;
 

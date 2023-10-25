@@ -1,6 +1,6 @@
 package usts.pycro.pycslt.model.entity.pay;
 
-import usts.pycro.pycslt.model.entity.base.BaseEntity;
+import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Data
 @Schema(description = "支付信息实体类")
-public class PaymentInfo extends BaseEntity {
+public class PaymentInfo extends BaseLogicEntity {
 
    private static final long serialVersionUID = 1L;
 

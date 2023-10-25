@@ -4,6 +4,7 @@ import com.mybatisflex.core.paginate.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import usts.pycro.pycslt.manager.service.SysUserService;
+import usts.pycro.pycslt.model.dto.system.AssignRoleBo;
 import usts.pycro.pycslt.model.dto.system.SysUserBo;
 import usts.pycro.pycslt.model.entity.system.SysUser;
 import usts.pycro.pycslt.model.vo.common.Result;
@@ -18,6 +19,13 @@ import usts.pycro.pycslt.model.vo.common.Result;
 public class SysUserController {
     @Autowired
     private SysUserService sysUserService;
+
+
+    @PostMapping("/doAssign")
+    public Result<?> doAssign(@RequestBody AssignRoleBo assignRoleBo) {
+        sysUserService.doAssign(assignRoleBo);
+        return Result.ok(null);
+    }
 
     /**
      * 条件分页查询

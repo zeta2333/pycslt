@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Schema(description = "区域实体类")
-public class Region extends BaseEntity {
+public class Region extends BaseLogicEntity {
 
 	@Schema(description = "区域编码")
 	private String code;

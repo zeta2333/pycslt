@@ -1,6 +1,6 @@
 package usts.pycro.pycslt.model.entity.product;
 
-import usts.pycro.pycslt.model.entity.base.BaseEntity;
+import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 @Data
 @Schema(description = "ProductSku")
-public class ProductSku extends BaseEntity {
+public class ProductSku extends BaseLogicEntity {
 
 	@Schema(description = "商品编号")
 	private String skuCode;

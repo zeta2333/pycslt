@@ -2,11 +2,11 @@ package usts.pycro.pycslt.model.entity.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import usts.pycro.pycslt.model.entity.base.BaseEntity;
+import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 
 @Data
 @Schema(description = "用户地址实体类")
-public class UserAddress extends BaseEntity {
+public class UserAddress extends BaseLogicEntity {
 
    private static final long serialVersionUID = 1L;
 

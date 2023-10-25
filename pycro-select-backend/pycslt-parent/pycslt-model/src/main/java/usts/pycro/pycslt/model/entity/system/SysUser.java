@@ -4,12 +4,12 @@ import com.mybatisflex.annotation.Column;
 import com.mybatisflex.annotation.Table;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import usts.pycro.pycslt.model.entity.base.BaseEntity;
+import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 
 @Data
 @Schema(description = "系统用户实体类")
 @Table("sys_user")
-public class SysUser extends BaseEntity {
+public class SysUser extends BaseLogicEntity {
 
     @Schema(description = "用户名")
     @Column("username")

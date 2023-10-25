@@ -11,17 +11,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import usts.pycro.pycslt.common.exception.ServiceException;
+import usts.pycro.pycslt.enums.RedisKeyEnum;
 import usts.pycro.pycslt.manager.mapper.SysUserMapper;
+import usts.pycro.pycslt.manager.service.SysUserRoleService;
 import usts.pycro.pycslt.manager.service.SysUserService;
+import usts.pycro.pycslt.model.dto.system.AssignRoleBo;
 import usts.pycro.pycslt.model.dto.system.LoginBo;
 import usts.pycro.pycslt.model.dto.system.SysUserBo;
 import usts.pycro.pycslt.model.entity.system.SysUser;
+import usts.pycro.pycslt.model.entity.system.SysUserRole;
 import usts.pycro.pycslt.model.vo.common.ResultCodeEnum;
 import usts.pycro.pycslt.model.vo.system.LoginVo;
-import usts.pycro.pycslt.enums.RedisKeyEnum;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static usts.pycro.pycslt.model.entity.system.table.SysUserRoleTableDef.SYS_USER_ROLE;
 import static usts.pycro.pycslt.model.entity.system.table.SysUserTableDef.SYS_USER;
 
 /**
@@ -34,6 +40,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
+
+    @Autowired
+    private SysUserRoleService sysUserRoleService;
 
     /**
      * 用户登录
@@ -106,6 +115,29 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     /**
+     * 用户分配角色
+     *
+     * @param assignRoleBo
+     */
+    @Override
+    public void doAssign(AssignRoleBo assignRoleBo) {
+        Long userId = assignRoleBo.getUserId();
+        List<Long> roleIdList = assignRoleBo.getRoleIdList();
+        // 根据userId删除用户之前分配的角色数据
+        sysUserRoleService.remove(QueryWrapper.create()
+                .where(SYS_USER_ROLE.USER_ID.eq(userId)));
+        // 重新分配数据
+        List<SysUserRole> sysUserRoles = new ArrayList<>();
+        for (Long roleId : roleIdList) {
+            SysUserRole sysUserRole = new SysUserRole();
+            sysUserRole.setUserId(userId);
+            sysUserRole.setRoleId(roleId);
+            sysUserRoles.add(sysUserRole);
+        }
+        sysUserRoleService.saveBatch(sysUserRoles);
+    }
+
+    /**
      * 修改用户
      *
      * @param sysUser
@@ -137,11 +169,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             throw new ServiceException("用户名不能为空");
         }
         // 用户名重名校验
-        long repeatCnt = count(QueryWrapper.create()
+        long repeatCount = count(QueryWrapper.create()
                 .select(SYS_USER.ID)
                 .where(SYS_USER.USER_NAME.eq(userName))
         );
-        if (repeatCnt > 0) {
+        if (repeatCount > 0) {
             throw new ServiceException(ResultCodeEnum.USER_NAME_IS_EXISTS);
         }
         // 密码加密

@@ -39,3 +39,19 @@ export const DeleteSysRoleById = (roleId) => {
 
     })
 }
+
+// 查询所有的角色数据
+export const GetAllRoleList = () => {
+    return request({
+        url: `${base_api}/getAllRoles`,
+        method: 'get'
+    })
+}
+
+// 查询用户分配的角色数据
+export const GetAssignedRoleList = (userId) => {
+    return request({
+        url: `${base_api}/getAssignedRoles/${userId}`,
+        method: 'get'
+    })
+}

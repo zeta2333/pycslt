@@ -1,6 +1,6 @@
 package usts.pycro.pycslt.model.entity.h5;
 
-import usts.pycro.pycslt.model.entity.base.BaseEntity;
+import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 @Data
 @Schema(description = "购物车实体类")
-public class CartInfo extends BaseEntity {
+public class CartInfo extends BaseLogicEntity {
    
    private static final long serialVersionUID = 1L;
 
