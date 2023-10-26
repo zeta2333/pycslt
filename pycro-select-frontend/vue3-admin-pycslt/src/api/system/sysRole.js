@@ -55,3 +55,12 @@ export const GetAssignedRoleList = (userId) => {
         method: 'get'
     })
 }
+
+// 给角色分配菜单
+export const DoAssignMenuToRole = (assignMenuBo) => {
+    return request({
+        url: `${base_api}/doAssign`,
+        method: 'post',
+        data: assignMenuBo
+    })
+}

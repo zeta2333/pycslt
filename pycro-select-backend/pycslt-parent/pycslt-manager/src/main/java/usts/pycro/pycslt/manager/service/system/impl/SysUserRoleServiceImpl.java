@@ -1,10 +1,10 @@
-package usts.pycro.pycslt.manager.service.impl;
+package usts.pycro.pycslt.manager.service.system.impl;
 
 import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import usts.pycro.pycslt.manager.mapper.SysUserRoleMapper;
-import usts.pycro.pycslt.manager.service.SysUserRoleService;
+import usts.pycro.pycslt.manager.service.system.SysUserRoleService;
 import usts.pycro.pycslt.model.entity.system.SysUserRole;
 
 import java.util.List;

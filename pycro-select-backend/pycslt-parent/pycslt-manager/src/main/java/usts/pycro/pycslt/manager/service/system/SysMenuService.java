@@ -1,4 +1,4 @@
-package usts.pycro.pycslt.manager.service;
+package usts.pycro.pycslt.manager.service.system;
 
 import com.mybatisflex.core.service.IService;
 import usts.pycro.pycslt.model.entity.system.SysMenu;
@@ -18,4 +18,10 @@ public interface SysMenuService extends IService<SysMenu> {
      * @return
      */
     List<SysMenu> findNodes();
+
+    /**
+     * 删除
+     * @param id
+     */
+    void removeMenuById(Long id);
 }

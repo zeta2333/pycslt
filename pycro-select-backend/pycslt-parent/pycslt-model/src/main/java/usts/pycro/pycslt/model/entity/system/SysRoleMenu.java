@@ -24,6 +24,9 @@ public class SysRoleMenu extends BaseEntity {
 
     private Long menuId;
 
+    /**
+     * 是否为半开：只选择了部分子菜单
+     */
     private Integer isHalf;
 
 }

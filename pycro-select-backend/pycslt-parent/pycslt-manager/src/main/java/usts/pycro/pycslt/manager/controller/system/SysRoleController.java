@@ -1,10 +1,11 @@
-package usts.pycro.pycslt.manager.controller;
+package usts.pycro.pycslt.manager.controller.system;
 
 import com.mybatisflex.core.paginate.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import usts.pycro.pycslt.manager.service.SysRoleService;
-import usts.pycro.pycslt.manager.service.SysUserRoleService;
+import usts.pycro.pycslt.manager.service.system.SysRoleService;
+import usts.pycro.pycslt.manager.service.system.SysUserRoleService;
+import usts.pycro.pycslt.model.dto.system.AssignMenuBo;
 import usts.pycro.pycslt.model.dto.system.SysRoleBo;
 import usts.pycro.pycslt.model.entity.system.SysRole;
 import usts.pycro.pycslt.model.vo.common.Result;
@@ -25,8 +26,20 @@ public class SysRoleController {
     @Autowired
     private SysUserRoleService sysUserRoleService;
 
+
+    /**
+     * 为角色分配菜单
+     * @return
+     */
+    @PostMapping("/doAssign")
+    public Result<?> doAssign(@RequestBody AssignMenuBo assignMenuBo) {
+        sysRoleService.doAssign(assignMenuBo);
+        return Result.ok(null);
+    }
+
     /**
      * 查询用户已分配的角色id
+     *
      * @param userId
      * @return
      */

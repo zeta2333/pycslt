@@ -1,7 +1,9 @@
-package usts.pycro.pycslt.manager.service;
+package usts.pycro.pycslt.manager.service.system;
 
 import com.mybatisflex.core.service.IService;
 import usts.pycro.pycslt.model.entity.system.SysRoleMenu;
+
+import java.util.List;
 
 /**
  * 角色菜单 服务层。
@@ -11,4 +13,10 @@ import usts.pycro.pycslt.model.entity.system.SysRoleMenu;
  */
 public interface SysRoleMenuService extends IService<SysRoleMenu> {
 
+    /**
+     * 查询角色已分配的所有菜单id
+     * @param roleId
+     * @return
+     */
+    List<Long> findMenuIdsByRoleId(Long roleId);
 }

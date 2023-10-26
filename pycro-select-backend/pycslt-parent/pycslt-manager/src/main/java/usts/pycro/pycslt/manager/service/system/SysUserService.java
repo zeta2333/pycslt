@@ -1,4 +1,4 @@
-package usts.pycro.pycslt.manager.service;
+package usts.pycro.pycslt.manager.service.system;
 
 import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.service.IService;

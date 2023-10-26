@@ -1,4 +1,4 @@
-package usts.pycro.pycslt.manager.service.impl;
+package usts.pycro.pycslt.manager.service.util.impl;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.CircleCaptcha;
@@ -6,7 +6,7 @@ import cn.hutool.core.lang.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import usts.pycro.pycslt.manager.service.ValidateCodeService;
+import usts.pycro.pycslt.manager.service.util.ValidateCodeService;
 import usts.pycro.pycslt.model.vo.system.ValidateCodeVo;
 import usts.pycro.pycslt.enums.RedisKeyEnum;
 

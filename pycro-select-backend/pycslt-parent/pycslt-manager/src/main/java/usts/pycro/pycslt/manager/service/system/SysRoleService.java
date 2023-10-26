@@ -1,7 +1,8 @@
-package usts.pycro.pycslt.manager.service;
+package usts.pycro.pycslt.manager.service.system;
 
 import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.service.IService;
+import usts.pycro.pycslt.model.dto.system.AssignMenuBo;
 import usts.pycro.pycslt.model.dto.system.SysRoleBo;
 import usts.pycro.pycslt.model.entity.system.SysRole;
 
@@ -13,11 +14,18 @@ import usts.pycro.pycslt.model.entity.system.SysRole;
 public interface SysRoleService extends IService<SysRole> {
     /**
      * 分页查询
-     * @param page 分页参数
+     *
+     * @param page      分页参数
      * @param sysRoleBo 查询对象
      * @return
      */
     Page<SysRole> pageQuery(Page<SysRole> page, SysRoleBo sysRoleBo);
 
 
+    /**
+     * 角色分配菜单
+     *
+     * @param assignMenuBo
+     */
+    void doAssign(AssignMenuBo assignMenuBo);
 }

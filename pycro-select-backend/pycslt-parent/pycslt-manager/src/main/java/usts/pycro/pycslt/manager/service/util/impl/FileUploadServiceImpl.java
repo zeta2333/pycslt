@@ -1,4 +1,4 @@
-package usts.pycro.pycslt.manager.service.impl;
+package usts.pycro.pycslt.manager.service.util.impl;
 
 import cn.hutool.core.date.DateUtil;
 import io.minio.BucketExistsArgs;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import usts.pycro.pycslt.common.exception.ServiceException;
 import usts.pycro.pycslt.manager.properties.ApplicationProperties;
-import usts.pycro.pycslt.manager.service.FileUploadService;
+import usts.pycro.pycslt.manager.service.util.FileUploadService;
 
 import java.util.Date;
 

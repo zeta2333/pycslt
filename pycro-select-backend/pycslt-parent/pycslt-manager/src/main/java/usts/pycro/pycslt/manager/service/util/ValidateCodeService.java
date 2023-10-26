@@ -1,4 +1,4 @@
-package usts.pycro.pycslt.manager.service;
+package usts.pycro.pycslt.manager.service.util;
 
 import usts.pycro.pycslt.model.vo.system.ValidateCodeVo;
 

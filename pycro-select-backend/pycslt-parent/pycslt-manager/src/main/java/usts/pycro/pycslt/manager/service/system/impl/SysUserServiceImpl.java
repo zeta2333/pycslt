@@ -1,4 +1,4 @@
-package usts.pycro.pycslt.manager.service.impl;
+package usts.pycro.pycslt.manager.service.system.impl;
 
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.StrUtil;
@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 import usts.pycro.pycslt.common.exception.ServiceException;
 import usts.pycro.pycslt.enums.RedisKeyEnum;
 import usts.pycro.pycslt.manager.mapper.SysUserMapper;
-import usts.pycro.pycslt.manager.service.SysUserRoleService;
-import usts.pycro.pycslt.manager.service.SysUserService;
+import usts.pycro.pycslt.manager.service.system.SysUserRoleService;
+import usts.pycro.pycslt.manager.service.system.SysUserService;
 import usts.pycro.pycslt.model.dto.system.AssignRoleBo;
 import usts.pycro.pycslt.model.dto.system.LoginBo;
 import usts.pycro.pycslt.model.dto.system.SysUserBo;

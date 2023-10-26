@@ -31,7 +31,7 @@ public class LoginAuthInterceptor implements HandlerInterceptor {
     private RedisTemplate<String, String> redisTemplate;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         // 1 获取请求方式
         String method = request.getMethod();
         // 如果请求方式为options（预检请求），则直接放行
@@ -57,7 +57,7 @@ public class LoginAuthInterceptor implements HandlerInterceptor {
         AuthContextUtil.set(sysUser);
         // 7 把redis用户信息更新过期时间
         redisTemplate.expire(RedisKeyEnum.USER_LOGIN.getValue() + token,
-                30, TimeUnit.MINUTES);
+                1440, TimeUnit.MINUTES);
         // 8 放行
         return true;
     }

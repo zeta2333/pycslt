@@ -1,4 +1,4 @@
-package usts.pycro.pycslt.manager.controller;
+package usts.pycro.pycslt.manager.controller.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import usts.pycro.pycslt.manager.service.FileUploadService;
+import usts.pycro.pycslt.manager.service.util.FileUploadService;
 import usts.pycro.pycslt.model.vo.common.Result;
 
 /**

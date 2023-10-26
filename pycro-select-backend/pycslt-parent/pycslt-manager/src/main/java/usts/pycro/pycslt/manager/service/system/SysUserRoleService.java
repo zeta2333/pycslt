@@ -1,4 +1,4 @@
-package usts.pycro.pycslt.manager.service;
+package usts.pycro.pycslt.manager.service.system;
 
 import com.mybatisflex.core.service.IService;
 import usts.pycro.pycslt.model.entity.system.SysUserRole;
