@@ -2,6 +2,7 @@ package usts.pycro.pycslt.manager.service.system;
 
 import com.mybatisflex.core.service.IService;
 import usts.pycro.pycslt.model.entity.system.SysMenu;
+import usts.pycro.pycslt.model.vo.system.SysMenuVo;
 
 import java.util.List;
 
@@ -24,4 +25,10 @@ public interface SysMenuService extends IService<SysMenu> {
      * @param id
      */
     void removeMenuById(Long id);
+
+    /**
+     * 查询用户拥有的菜单
+     * @return
+     */
+    List<SysMenuVo> findMenusByUserId();
 }

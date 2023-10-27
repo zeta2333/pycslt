@@ -5,14 +5,18 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import usts.pycro.pycslt.manager.service.system.SysMenuService;
 import usts.pycro.pycslt.manager.service.system.SysUserService;
 import usts.pycro.pycslt.manager.service.util.ValidateCodeService;
 import usts.pycro.pycslt.model.dto.system.LoginBo;
 import usts.pycro.pycslt.model.entity.system.SysUser;
 import usts.pycro.pycslt.model.vo.common.Result;
 import usts.pycro.pycslt.model.vo.system.LoginVo;
+import usts.pycro.pycslt.model.vo.system.SysMenuVo;
 import usts.pycro.pycslt.model.vo.system.ValidateCodeVo;
 import usts.pycro.pycslt.utils.AuthContextUtil;
+
+import java.util.List;
 
 /**
  * @author Pycro
@@ -29,6 +33,14 @@ public class IndexController {
 
     @Autowired
     private ValidateCodeService validateCodeService;
+    @Autowired
+    private SysMenuService sysMenuService;
+
+    @GetMapping("/menus")
+    public Result<List<SysMenuVo>> findMenusByUserId() {
+        List<SysMenuVo> sysMenuVos = sysMenuService.findMenusByUserId();
+        return Result.ok(sysMenuVos);
+    }
 
     /**
      * 用户登出

@@ -29,7 +29,7 @@
         <fastjson.version>2.0.21</fastjson.version>
         <lombok.version>1.18.20</lombok.version>
         <mybatis.version>3.0.1</mybatis.version>
-        <mybatis-flex.version>1.7.0</mybatis-flex.version>
+        <mybatis-flex.version>1.7.3</mybatis-flex.version>
     </properties>
 
     <!-- 管理依赖，版本锁定 -->

@@ -1,6 +1,7 @@
 package usts.pycro.pycslt.manager.sysMenu;
 
 import com.alibaba.fastjson2.JSON;
+import com.mybatisflex.core.query.QueryWrapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,9 +9,14 @@ import usts.pycro.pycslt.manager.mapper.SysMenuMapper;
 import usts.pycro.pycslt.manager.service.system.SysMenuService;
 import usts.pycro.pycslt.manager.service.system.SysRoleMenuService;
 import usts.pycro.pycslt.model.entity.system.SysMenu;
+import usts.pycro.pycslt.model.vo.system.SysMenuVo;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static usts.pycro.pycslt.model.entity.system.table.SysMenuTableDef.SYS_MENU;
+import static usts.pycro.pycslt.model.entity.system.table.SysRoleMenuTableDef.SYS_ROLE_MENU;
+import static usts.pycro.pycslt.model.entity.system.table.SysUserRoleTableDef.SYS_USER_ROLE;
 
 /**
  * @author Pycro
@@ -61,13 +67,32 @@ public class SysMenuServiceTest {
     }
 
     @Test
-    public void testDelete(){
+    public void testDelete() {
         sysMenuService.removeMenuById(1L);
     }
 
     @Test
-    public void testSelectRoleMenuIds(){
+    public void testSelectRoleMenuIds() {
         List<Long> menuIdsByRoleId = sysRoleMenuService.findMenuIdsByRoleId(9L);
         System.out.println(menuIdsByRoleId);
     }
+
+    @Test
+    public void testGetMenusByUserId() {
+        List<SysMenu> sysMenus = sysMenuMapper.selectListWithRelationsByQuery(
+                QueryWrapper.create()
+                        .from(SYS_MENU)
+                        .leftJoin(SYS_ROLE_MENU).on(SYS_ROLE_MENU.MENU_ID.eq(SYS_MENU.ID))
+                        .leftJoin(SYS_USER_ROLE).on(SYS_USER_ROLE.ROLE_ID.eq(SYS_ROLE_MENU.ROLE_ID))
+                        .where(SYS_USER_ROLE.USER_ID.eq(1))
+                        .and(SYS_MENU.PARENT_ID.eq(0)));
+        System.out.println(sysMenus);
+    }
+
+    @Test
+    public void testServiceMethod() {
+        List<SysMenuVo> menuVos = sysMenuService.findMenusByUserId();
+        System.out.println(JSON.toJSONString(menuVos));
+    }
+
 }

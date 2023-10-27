@@ -63,7 +63,7 @@
     </el-dialog>
 
     <!---数据表格-->
-    <el-table :data="list" style="width: 100%">
+    <el-table v-loading="listLoading" :data="list" style="width: 100%">
         <el-table-column prop="userName" label="用户名" />
         <el-table-column prop="name" label="姓名" />
         <el-table-column prop="phone" label="手机" />
@@ -127,10 +127,10 @@ const showAssignRole = async (row) => {
     sysUser.value = { ...row }
     dialogRoleVisible.value = true
     // 获取所有角色
-    const allRoleList = await GetAllRoleList()    
+    const allRoleList = await GetAllRoleList()
     allRoles.value = allRoleList.data
     // 获取当前用户已分配的角色
-    const assignedRoleList = await GetAssignedRoleList(row.id)    
+    const assignedRoleList = await GetAssignedRoleList(row.id)
     userRoleIds.value = assignedRoleList.data
 }
 
@@ -224,6 +224,8 @@ const submit = async () => {
 }
 
 ////////////////用户列表
+// 加载动画
+const listLoading = ref(true)
 // 表格数据模型
 const list = ref([]);
 
@@ -262,17 +264,21 @@ const fetchData = async () => {
         pageParams.value.limit,
         queryBo.value
     );
+    listLoading.value = false
     list.value = data.records
     total.value = data.totalRow
 }
 
 // 搜索方法
 const searchSysUser = () => {
+    listLoading.value = true
     fetchData();
 }
 // 重置方法
 const resetData = () => {
+    listLoading.value = true
     queryBo.value.keyword = ""
+    createTimes.value = ['', '']
     fetchData()
 }
 

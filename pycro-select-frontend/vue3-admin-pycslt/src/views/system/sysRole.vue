@@ -97,6 +97,8 @@ const showAssignMenu = async row => {
     roleId = row.id
     const sysMenuTree = await FindNodes() // 获取所有的菜单数据
     const roleMenuIds = await GetSysRoleMenuIds(row.id) // 获取当前角色所对应的菜单数据
+    console.log("sysMenuTree:",sysMenuTree.data)
+    console.log("roleMenuIds:",roleMenuIds.data)
     sysMenuTreeList.value = sysMenuTree.data
     tree.value.setCheckedKeys(roleMenuIds.data)   // 进行数据回显
 }

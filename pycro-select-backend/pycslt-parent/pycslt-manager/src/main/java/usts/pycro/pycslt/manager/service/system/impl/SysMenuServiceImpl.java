@@ -7,12 +7,17 @@ import org.springframework.stereotype.Service;
 import usts.pycro.pycslt.common.exception.ServiceException;
 import usts.pycro.pycslt.manager.mapper.SysMenuMapper;
 import usts.pycro.pycslt.manager.service.system.SysMenuService;
+import usts.pycro.pycslt.manager.util.MenuHelper;
 import usts.pycro.pycslt.model.entity.system.SysMenu;
+import usts.pycro.pycslt.model.vo.system.SysMenuVo;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 import static usts.pycro.pycslt.model.entity.system.table.SysMenuTableDef.SYS_MENU;
+import static usts.pycro.pycslt.model.entity.system.table.SysRoleMenuTableDef.SYS_ROLE_MENU;
+import static usts.pycro.pycslt.model.entity.system.table.SysUserRoleTableDef.SYS_USER_ROLE;
 
 /**
  * 菜单表 服务层实现。
@@ -49,6 +54,50 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         }
     }
 
+
+    /**
+     * 查询用户拥有的菜单
+     *
+     * @return
+     */
+    @Override
+    public List<SysMenuVo> findMenusByUserId() {
+        // 获取当前用户id
+        // Long userId = AuthContextUtil.get().getId();
+        Long userId = 12L;
+        // 根据用户id查询菜单
+        List<SysMenu> sysMenus = mapper.selectListWithRelationsByQuery(QueryWrapper.create()
+                .select(SYS_MENU.DEFAULT_COLUMNS)
+                .from(SYS_MENU)
+                .leftJoin(SYS_ROLE_MENU).on(SYS_ROLE_MENU.MENU_ID.eq(SYS_MENU.ID))
+                .leftJoin(SYS_USER_ROLE).on(SYS_USER_ROLE.ROLE_ID.eq(SYS_ROLE_MENU.ROLE_ID))
+                .where(SYS_USER_ROLE.USER_ID.eq(userId))
+        );
+        // 构建菜单树形结构
+        List<SysMenu> menuTree = MenuHelper.buildMenuTree(sysMenus);
+        // 构建数据结构返回
+        return buildMenuVos(menuTree);
+    }
+
+    /**
+     * 构建子菜单Vo
+     *
+     * @param sysMenus
+     * @return
+     */
+    private List<SysMenuVo> buildMenuVos(List<SysMenu> sysMenus) {
+        List<SysMenuVo> sysMenuVos = new ArrayList<>();
+        for (SysMenu sysMenu : sysMenus) {
+            SysMenuVo sysMenuVo = new SysMenuVo();
+            sysMenuVo.setTitle(sysMenu.getTitle());
+            sysMenuVo.setName(sysMenu.getComponent());
+            if (CollectionUtil.isNotEmpty(sysMenu.getChildren())) { // 防止空指针
+                sysMenuVo.setChildren(buildMenuVos(sysMenu.getChildren()));
+            }
+            sysMenuVos.add(sysMenuVo);
+        }
+        return sysMenuVos;
+    }
 
     /**
      * 删除
