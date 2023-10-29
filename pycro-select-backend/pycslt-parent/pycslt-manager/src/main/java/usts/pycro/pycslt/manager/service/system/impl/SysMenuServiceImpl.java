@@ -3,18 +3,23 @@ package usts.pycro.pycslt.manager.service.system.impl;
 import cn.hutool.core.collection.CollectionUtil;
 import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import usts.pycro.pycslt.common.exception.ServiceException;
 import usts.pycro.pycslt.manager.mapper.SysMenuMapper;
+import usts.pycro.pycslt.manager.mapper.SysRoleMenuMapper;
 import usts.pycro.pycslt.manager.service.system.SysMenuService;
 import usts.pycro.pycslt.manager.util.MenuHelper;
 import usts.pycro.pycslt.model.entity.system.SysMenu;
+import usts.pycro.pycslt.model.entity.system.SysRoleMenu;
 import usts.pycro.pycslt.model.vo.system.SysMenuVo;
+import usts.pycro.pycslt.utils.AuthContextUtil;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.mybatisflex.core.query.QueryMethods.distinct;
 import static usts.pycro.pycslt.model.entity.system.table.SysMenuTableDef.SYS_MENU;
 import static usts.pycro.pycslt.model.entity.system.table.SysRoleMenuTableDef.SYS_ROLE_MENU;
 import static usts.pycro.pycslt.model.entity.system.table.SysUserRoleTableDef.SYS_USER_ROLE;
@@ -27,6 +32,9 @@ import static usts.pycro.pycslt.model.entity.system.table.SysUserRoleTableDef.SY
  */
 @Service
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements SysMenuService {
+
+    @Autowired
+    private SysRoleMenuMapper sysRoleMenuMapper;
 
     /**
      * 查询所有菜单，递归层级返回
@@ -56,6 +64,41 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 
 
     /**
+     * 添加菜单
+     *
+     * @param sysMenu
+     */
+    @Override
+    public void saveMenu(SysMenu sysMenu) {
+        // 保存
+        save(sysMenu);
+        // 将父菜单的isHalf修改为1
+        updateSysRoleMenu(sysMenu);
+    }
+
+    /**
+     * 修改sysRoleMenu中的父菜单的isHalf为1
+     *
+     * @param sysMenu
+     */
+    private void updateSysRoleMenu(SysMenu sysMenu) {
+        SysMenu parentMenu = mapper.selectOneById(sysMenu.getParentId());
+        if (parentMenu == null) {
+            return;
+        }
+        Long parentId = parentMenu.getId();
+        // 修改roleMenu记录
+        List<SysRoleMenu> roleMenus = sysRoleMenuMapper.selectListByQuery(QueryWrapper.create()
+                .where(SYS_ROLE_MENU.MENU_ID.eq(parentId)));
+        for (SysRoleMenu roleMenu : roleMenus) {
+            roleMenu.setIsHalf(1);
+            sysRoleMenuMapper.update(roleMenu);
+        }
+        // 递归调用
+        updateSysRoleMenu(parentMenu);
+    }
+
+    /**
      * 查询用户拥有的菜单
      *
      * @return
@@ -63,14 +106,13 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     @Override
     public List<SysMenuVo> findMenusByUserId() {
         // 获取当前用户id
-        // Long userId = AuthContextUtil.get().getId();
-        Long userId = 12L;
-        // 根据用户id查询菜单
-        List<SysMenu> sysMenus = mapper.selectListWithRelationsByQuery(QueryWrapper.create()
-                .select(SYS_MENU.DEFAULT_COLUMNS)
+        Long userId = AuthContextUtil.get().getId();
+        // 根据用户id查询菜单(注意去重)
+        List<SysMenu> sysMenus = mapper.selectListByQuery(QueryWrapper.create()
+                .select(distinct(SYS_MENU.DEFAULT_COLUMNS))
                 .from(SYS_MENU)
-                .leftJoin(SYS_ROLE_MENU).on(SYS_ROLE_MENU.MENU_ID.eq(SYS_MENU.ID))
-                .leftJoin(SYS_USER_ROLE).on(SYS_USER_ROLE.ROLE_ID.eq(SYS_ROLE_MENU.ROLE_ID))
+                .innerJoin(SYS_ROLE_MENU).on(SYS_ROLE_MENU.MENU_ID.eq(SYS_MENU.ID))
+                .innerJoin(SYS_USER_ROLE).on(SYS_USER_ROLE.ROLE_ID.eq(SYS_ROLE_MENU.ROLE_ID))
                 .where(SYS_USER_ROLE.USER_ID.eq(userId))
         );
         // 构建菜单树形结构

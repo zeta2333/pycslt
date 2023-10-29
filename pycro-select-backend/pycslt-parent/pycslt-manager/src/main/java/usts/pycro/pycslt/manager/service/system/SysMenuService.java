@@ -31,4 +31,10 @@ public interface SysMenuService extends IService<SysMenu> {
      * @return
      */
     List<SysMenuVo> findMenusByUserId();
+
+    /**
+     * 添加菜单
+     * @param sysMenu
+     */
+    void saveMenu(SysMenu sysMenu);
 }

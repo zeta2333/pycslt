@@ -70,7 +70,7 @@ public class SysMenuController {
      */
     @PostMapping("/save")
     public Result<?> save(@RequestBody SysMenu sysMenu) {
-        sysMenuService.save(sysMenu);
+        sysMenuService.saveMenu(sysMenu);
         return Result.ok(null);
     }
 
