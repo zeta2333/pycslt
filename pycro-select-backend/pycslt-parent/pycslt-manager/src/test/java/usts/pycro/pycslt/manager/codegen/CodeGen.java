@@ -59,7 +59,7 @@ public class CodeGen {
 
         // 设置表前缀和只生成哪些表，setGenerateTable 未配置时，生成所有表
         globalConfig.getStrategyConfig()
-                .setGenerateTable("sys_menu");
+                .setGenerateTable("category");
 
 
         // 设置生成 entity 并启用 Lombok
@@ -77,7 +77,7 @@ public class CodeGen {
         globalConfig.enableServiceImpl();
 
         // 设置生成Controller
-        // globalConfig.enableController();
+        globalConfig.enableController();
 
         // 可以单独配置某个列
         /*ColumnConfig columnConfig = new ColumnConfig();

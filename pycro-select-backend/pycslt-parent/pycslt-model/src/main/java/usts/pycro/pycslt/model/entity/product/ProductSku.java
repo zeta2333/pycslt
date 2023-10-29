@@ -1,5 +1,6 @@
 package usts.pycro.pycslt.model.entity.product;
 
+import com.mybatisflex.annotation.Table;
 import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -8,6 +9,7 @@ import java.math.BigDecimal;
 
 @Data
 @Schema(description = "ProductSku")
+@Table("product_sku")
 public class ProductSku extends BaseLogicEntity {
 
 	@Schema(description = "商品编号")

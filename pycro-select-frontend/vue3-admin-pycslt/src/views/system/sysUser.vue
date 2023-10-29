@@ -22,94 +22,95 @@
                 <el-button size="small" @click="resetData">重置</el-button>
             </el-row>
         </el-form>
+
+
+        <!--添加按钮-->
+        <div class="tools-div">
+            <el-button type="success" size="small" @click="addShow">添 加</el-button>
+        </div>
+        <!-- 弹框 -->
+        <el-dialog v-model="dialogVisible" title="添加或修改" width="40%">
+            <el-form label-width="120px">
+                <el-form-item label="用户名">
+                    <el-input v-model="sysUser.userName" />
+                </el-form-item>
+                <el-form-item v-if="sysUser.id == null" label="密码">
+                    <el-input type="password" show-password v-model="sysUser.password" />
+                </el-form-item>
+                <el-form-item label="姓名">
+                    <el-input v-model="sysUser.name" />
+                </el-form-item>
+                <el-form-item label="手机">
+                    <el-input v-model="sysUser.phone" />
+                </el-form-item>
+                <el-form-item label="头像">
+                    <el-upload class="avatar-uploader" action="http://localhost:6815/admin/system/fileUpload"
+                        :show-file-list="false" :on-success="handleAvatarSuccess" :headers="headers">
+                        <img v-if="sysUser.avatar" :src="sysUser.avatar" class="avatar" />
+                        <el-icon v-else class="avatar-uploader-icon">
+                            <Plus />
+                        </el-icon>
+                    </el-upload>
+                </el-form-item>
+                <el-form-item label="描述">
+                    <el-input v-model="sysUser.description" />
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="submit">提交</el-button>
+                    <el-button @click="dialogVisible = false">取消</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+
+        <!---数据表格-->
+        <el-table v-loading="listLoading" :data="list" style="width: 100%">
+            <el-table-column prop="userName" label="用户名" />
+            <el-table-column prop="name" label="姓名" />
+            <el-table-column prop="phone" label="手机" />
+            <el-table-column prop="avatar" label="头像" #default="scope">
+                <img :src="scope.row.avatar" width="50" />
+            </el-table-column>
+            <el-table-column prop="description" label="描述" />
+            <el-table-column prop="status" label="状态" #default="scope">
+                {{ scope.row.status == 1 ? '正常' : '停用' }}
+            </el-table-column>
+            <el-table-column prop="createTime" label="创建时间" />
+            <el-table-column label="操作" align="center" width="280" #default="scope">
+                <el-button type="primary" size="small" @click="editShow(scope.row)">
+                    修改
+                </el-button>
+                <el-button type="danger" size="small" @click="deleteById(scope.row)">
+                    删除
+                </el-button>
+                <el-button type="warning" size="small" @click="showAssignRole(scope.row)">
+                    分配角色
+                </el-button>
+            </el-table-column>
+        </el-table>
+        <el-dialog v-model="dialogRoleVisible" title="分配角色" width="40%">
+            <el-form label-width="80px">
+                <el-form-item label="用户名">
+                    <el-input disabled :value="sysUser.userName"></el-input>
+                </el-form-item>
+
+                <el-form-item label="角色列表">
+                    <el-checkbox-group v-model="userRoleIds">
+                        <el-checkbox v-for="role in allRoles" :key="role.id" :label="role.id">
+                            {{ role.roleName }}
+                        </el-checkbox>
+                    </el-checkbox-group>
+                </el-form-item>
+
+                <el-form-item>
+                    <el-button type="primary" @click="doAssign">提交</el-button>
+                    <el-button @click="dialogRoleVisible = false">取消</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+        <el-pagination v-model:current-page="pageParams.page" v-model:page-size="pageParams.limit"
+            :page-sizes="[5, 10, 20, 50, 100]" @size-change="fetchData" @current-change="fetchData"
+            layout="total, sizes, prev, pager, next" :total="total" />
     </div>
-
-    <!--添加按钮-->
-    <div class="tools-div">
-        <el-button type="success" size="small" @click="addShow">添 加</el-button>
-    </div>
-    <!-- 弹框 -->
-    <el-dialog v-model="dialogVisible" title="添加或修改" width="40%">
-        <el-form label-width="120px">
-            <el-form-item label="用户名">
-                <el-input v-model="sysUser.userName" />
-            </el-form-item>
-            <el-form-item v-if="sysUser.id == null" label="密码">
-                <el-input type="password" show-password v-model="sysUser.password" />
-            </el-form-item>
-            <el-form-item label="姓名">
-                <el-input v-model="sysUser.name" />
-            </el-form-item>
-            <el-form-item label="手机">
-                <el-input v-model="sysUser.phone" />
-            </el-form-item>
-            <el-form-item label="头像">
-                <el-upload class="avatar-uploader" action="http://localhost:6815/admin/system/fileUpload"
-                    :show-file-list="false" :on-success="handleAvatarSuccess" :headers="headers">
-                    <img v-if="sysUser.avatar" :src="sysUser.avatar" class="avatar" />
-                    <el-icon v-else class="avatar-uploader-icon">
-                        <Plus />
-                    </el-icon>
-                </el-upload>
-            </el-form-item>
-            <el-form-item label="描述">
-                <el-input v-model="sysUser.description" />
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="submit">提交</el-button>
-                <el-button @click="dialogVisible = false">取消</el-button>
-            </el-form-item>
-        </el-form>
-    </el-dialog>
-
-    <!---数据表格-->
-    <el-table v-loading="listLoading" :data="list" style="width: 100%">
-        <el-table-column prop="userName" label="用户名" />
-        <el-table-column prop="name" label="姓名" />
-        <el-table-column prop="phone" label="手机" />
-        <el-table-column prop="avatar" label="头像" #default="scope">
-            <img :src="scope.row.avatar" width="50" />
-        </el-table-column>
-        <el-table-column prop="description" label="描述" />
-        <el-table-column prop="status" label="状态" #default="scope">
-            {{ scope.row.status == 1 ? '正常' : '停用' }}
-        </el-table-column>
-        <el-table-column prop="createTime" label="创建时间" />
-        <el-table-column label="操作" align="center" width="280" #default="scope">
-            <el-button type="primary" size="small" @click="editShow(scope.row)">
-                修改
-            </el-button>
-            <el-button type="danger" size="small" @click="deleteById(scope.row)">
-                删除
-            </el-button>
-            <el-button type="warning" size="small" @click="showAssignRole(scope.row)">
-                分配角色
-            </el-button>
-        </el-table-column>
-    </el-table>
-    <el-dialog v-model="dialogRoleVisible" title="分配角色" width="40%">
-        <el-form label-width="80px">
-            <el-form-item label="用户名">
-                <el-input disabled :value="sysUser.userName"></el-input>
-            </el-form-item>
-
-            <el-form-item label="角色列表">
-                <el-checkbox-group v-model="userRoleIds">
-                    <el-checkbox v-for="role in allRoles" :key="role.id" :label="role.id">
-                        {{ role.roleName }}
-                    </el-checkbox>
-                </el-checkbox-group>
-            </el-form-item>
-
-            <el-form-item>
-                <el-button type="primary" @click="doAssign">提交</el-button>
-                <el-button @click="dialogRoleVisible = false">取消</el-button>
-            </el-form-item>
-        </el-form>
-    </el-dialog>
-    <el-pagination v-model:current-page="pageParams.page" v-model:page-size="pageParams.limit"
-        :page-sizes="[5, 10, 20, 50, 100]" @size-change="fetchData" @current-change="fetchData"
-        layout="total, sizes, prev, pager, next" :total="total" />
 </template>
 
 <script setup>

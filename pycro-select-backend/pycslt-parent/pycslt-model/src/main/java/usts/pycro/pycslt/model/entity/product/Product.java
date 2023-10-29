@@ -1,5 +1,6 @@
 package usts.pycro.pycslt.model.entity.product;
 
+import com.mybatisflex.annotation.Table;
 import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Data
 @Schema(description = "商品实体类")
+@Table("product")
 public class Product extends BaseLogicEntity {
 
 	@Schema(description = "商品名称")
