@@ -3,7 +3,7 @@ package usts.pycro.pycslt.manager.sysRole;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import usts.pycro.pycslt.manager.service.system.SysUserRoleService;
+import usts.pycro.pycslt.manager.system.service.SysUserRoleService;
 
 import java.util.List;
 

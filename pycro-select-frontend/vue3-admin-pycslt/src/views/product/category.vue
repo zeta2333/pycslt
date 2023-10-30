@@ -1,8 +1,9 @@
 <template>
-    <div class="tools-div">
-        <el-button type="success" size="small" @click="exportData">导出</el-button>
-        <el-button type="primary" size="small" @click="importData">导入</el-button>
-
+    <div>
+        <div class="tools-div">
+            <el-button type="success" size="small" @click="exportData">导出</el-button>
+            <el-button type="primary" size="small" @click="importData">导入</el-button>
+        </div>
         <!-- 上传弹框 -->
         <el-dialog v-model="dialogImportVisible" title="导入" width="30%">
             <el-form label-width="120px">

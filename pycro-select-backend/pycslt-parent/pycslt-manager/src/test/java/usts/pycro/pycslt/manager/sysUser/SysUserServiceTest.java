@@ -5,8 +5,8 @@ import com.mybatisflex.core.query.QueryWrapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import usts.pycro.pycslt.manager.service.system.SysUserRoleService;
-import usts.pycro.pycslt.manager.service.system.SysUserService;
+import usts.pycro.pycslt.manager.system.service.SysUserRoleService;
+import usts.pycro.pycslt.manager.system.service.SysUserService;
 import usts.pycro.pycslt.model.dto.system.SysUserBo;
 import usts.pycro.pycslt.model.entity.system.SysUser;
 

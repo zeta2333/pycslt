@@ -3,7 +3,7 @@ package usts.pycro.pycslt.manager.applicationProperties;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import usts.pycro.pycslt.manager.properties.ApplicationProperties;
+import usts.pycro.pycslt.manager.system.properties.ApplicationProperties;
 
 /**
  * @author Pycro

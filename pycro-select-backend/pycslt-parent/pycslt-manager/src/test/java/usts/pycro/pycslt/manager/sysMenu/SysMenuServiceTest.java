@@ -5,9 +5,9 @@ import com.mybatisflex.core.query.QueryWrapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import usts.pycro.pycslt.manager.mapper.SysMenuMapper;
-import usts.pycro.pycslt.manager.service.system.SysMenuService;
-import usts.pycro.pycslt.manager.service.system.SysRoleMenuService;
+import usts.pycro.pycslt.manager.system.mapper.SysMenuMapper;
+import usts.pycro.pycslt.manager.system.service.SysMenuService;
+import usts.pycro.pycslt.manager.system.service.SysRoleMenuService;
 import usts.pycro.pycslt.model.entity.system.SysMenu;
 import usts.pycro.pycslt.model.vo.system.SysMenuVo;
 
