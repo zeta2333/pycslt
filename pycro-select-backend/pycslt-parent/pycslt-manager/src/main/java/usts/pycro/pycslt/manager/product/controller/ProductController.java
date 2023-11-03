@@ -25,14 +25,28 @@ public class ProductController {
     private ProductService productService;
 
     /**
+     * 商品审核
+     *
+     * @param id
+     * @param auditStatus
+     * @return
+     */
+    @GetMapping("/updateAuditStatus/{id}/{auditStatus}")
+    public Result<?> updateAuditStatus(@PathVariable Long id, @PathVariable Integer auditStatus) {
+        productService.updateAuditStatus(id, auditStatus);
+        return Result.ok(null);
+    }
+
+    /**
      * 添加商品。
      *
      * @param product 商品
      * @return {@code true} 添加成功，{@code false} 添加失败
      */
-    @PostMapping("save")
-    public boolean save(@RequestBody Product product) {
-        return productService.save(product);
+    @PostMapping("/save")
+    public Result<?> save(@RequestBody Product product) {
+        productService.add(product);
+        return Result.ok(null);
     }
 
     /**
@@ -41,9 +55,10 @@ public class ProductController {
      * @param id 主键
      * @return {@code true} 删除成功，{@code false} 删除失败
      */
-    @DeleteMapping("remove/{id}")
-    public boolean remove(@PathVariable Serializable id) {
-        return productService.removeById(id);
+    @DeleteMapping("deleteById/{id}")
+    public Result<?> remove(@PathVariable Serializable id) {
+        productService.deleteById(id);
+        return Result.ok(null);
     }
 
     /**
@@ -52,9 +67,10 @@ public class ProductController {
      * @param product 商品
      * @return {@code true} 更新成功，{@code false} 更新失败
      */
-    @PutMapping("update")
-    public boolean update(@RequestBody Product product) {
-        return productService.updateById(product);
+    @PutMapping("/updateById")
+    public Result<?> update(@RequestBody Product product) {
+        productService.updateProductById(product);
+        return Result.ok(null);
     }
 
     /**
@@ -73,9 +89,10 @@ public class ProductController {
      * @param id 商品主键
      * @return 商品详情
      */
-    @GetMapping("getInfo/{id}")
-    public Product getInfo(@PathVariable Serializable id) {
-        return productService.getById(id);
+    @GetMapping("getById/{id}")
+    public Result<Product> getById(@PathVariable Serializable id) {
+        Product product = productService.findById(id);
+        return Result.ok(product);
     }
 
 

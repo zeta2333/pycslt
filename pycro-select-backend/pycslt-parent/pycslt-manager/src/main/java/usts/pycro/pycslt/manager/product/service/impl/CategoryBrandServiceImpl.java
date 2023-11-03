@@ -64,8 +64,8 @@ public class CategoryBrandServiceImpl extends ServiceImpl<CategoryBrandMapper, C
                 .from(CATEGORY_BRAND)
                 .innerJoin(CATEGORY).on(CATEGORY_BRAND.CATEGORY_ID.eq(CATEGORY.ID))
                 .innerJoin(BRAND).on(CATEGORY_BRAND.BRAND_ID.eq(BRAND.ID))
-                .where(CATEGORY_BRAND.CATEGORY_ID.eq(categoryId, categoryId != null))
-                .and(CATEGORY_BRAND.BRAND_ID.eq(brandId, brandId != null))
+                .where(CATEGORY_BRAND.CATEGORY_ID.eq(categoryId))
+                .and(CATEGORY_BRAND.BRAND_ID.eq(brandId))
                 .orderBy(CATEGORY_BRAND.ID, false));
     }
 }

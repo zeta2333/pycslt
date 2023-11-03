@@ -3,13 +3,16 @@ package usts.pycro.pycslt.manager.product.product;
 import com.alibaba.fastjson2.JSON;
 import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.query.QueryWrapper;
+import com.mybatisflex.core.util.UpdateEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import usts.pycro.pycslt.manager.product.mapper.ProductMapper;
 import usts.pycro.pycslt.manager.product.service.ProductService;
 import usts.pycro.pycslt.model.dto.product.ProductBo;
 import usts.pycro.pycslt.model.entity.product.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static usts.pycro.pycslt.model.entity.product.table.ProductTableDef.PRODUCT;
@@ -23,6 +26,9 @@ import static usts.pycro.pycslt.model.entity.product.table.ProductTableDef.PRODU
 public class ProductTest {
     @Autowired
     private ProductService service;
+
+    @Autowired
+    private ProductMapper mapper;
 
     @Test
     public void testPageQuery() {
@@ -42,5 +48,22 @@ public class ProductTest {
         List<Product> list = service.list(QueryWrapper.create()
                 .where(PRODUCT.BRAND_ID.isNull(true)));
         System.out.println(list);
+    }
+
+    @Test
+    public void testInsert() {
+        Product product = new Product();
+        product.setName("pname");
+        product.setProductSkuList(new ArrayList<>());
+        product.setDetailsImageUrls("123");
+        service.save(product);
+    }
+
+    @Test
+    public void testUpdatePartField() {
+        Product product = UpdateEntity.of(Product.class, 233);
+        product.setAuditStatus(null);
+        product.setName(null);
+        mapper.update(product);
     }
 }

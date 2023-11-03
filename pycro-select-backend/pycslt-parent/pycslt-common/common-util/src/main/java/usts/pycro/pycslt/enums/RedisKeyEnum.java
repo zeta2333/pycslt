@@ -13,8 +13,8 @@ public enum RedisKeyEnum {
     USER_LOGIN(1, "user:login:"),
     USER_VALIDATE(2, "user:validate:");
 
-    private Integer code;
-    private String value;
+    private final Integer code;
+    private final String value;
 
     RedisKeyEnum(Integer code, String value) {
         this.code = code;

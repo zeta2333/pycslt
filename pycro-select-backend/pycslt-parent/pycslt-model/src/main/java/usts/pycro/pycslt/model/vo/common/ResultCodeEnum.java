@@ -22,7 +22,7 @@ public enum ResultCodeEnum {
     private Integer code;      // 业务状态码
     private String message;    // 响应消息
 
-    private ResultCodeEnum(Integer code, String message) {
+    ResultCodeEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
