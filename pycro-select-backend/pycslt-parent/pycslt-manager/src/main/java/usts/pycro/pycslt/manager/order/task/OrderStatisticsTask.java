@@ -31,7 +31,6 @@ public class OrderStatisticsTask {
     }*/
 
     @Scheduled(cron = "0 0 2 * * ?")
-    // @Scheduled(cron = "0/10 * * * * ?") // TODO 测试用
     public void orderTotalAmountStatistics() {
         log.info(new Date().toInstant().toString());
         // 1 获取前一天的日期
