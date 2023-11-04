@@ -1,11 +1,11 @@
 import request from '@/utils/request'
 
-const base_api = '/admin/product/productSpec'
+const api_name = '/admin/product/productSpec'
 
 // 分页列表
 export const GetProductSpecPageList = (page, limit) => {
     return request({
-      url: `${base_api}/page/${page}/${limit}`,
+      url: `${api_name}/page/${page}/${limit}`,
       method: 'get'
     })
 }
@@ -13,7 +13,7 @@ export const GetProductSpecPageList = (page, limit) => {
 // 保存信息
 export const SaveProductSpec = productSpec => {
     return request({
-      url: `${base_api}/save`,
+      url: `${api_name}/save`,
       method: 'post',
       data: productSpec,
     })
@@ -22,7 +22,7 @@ export const SaveProductSpec = productSpec => {
 // 修改信息
 export const UpdateProductSpecById = productSpec => {
     return request({
-        url: `${base_api}/update`,
+        url: `${api_name}/update`,
         method: 'put',
         data: productSpec,
     })
@@ -31,7 +31,15 @@ export const UpdateProductSpecById = productSpec => {
 // 根据id删除数据
 export const DeleteProductSpecById = id => {
     return request({
-      url: `${base_api}/remove/${id}`,
+      url: `${api_name}/remove/${id}`,
       method: 'delete',
     })
+}
+
+// 查询所有的产品规格数据
+export const FindAllProductSpec = () => {
+  return request({
+    url: `${api_name}/findAll`,
+    method: 'get',
+  })
 }

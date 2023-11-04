@@ -1,5 +1,6 @@
 package usts.pycro.pycslt.model.entity.order;
 
+import com.mybatisflex.annotation.Table;
 import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -8,6 +9,7 @@ import java.math.BigDecimal;
 
 @Data
 @Schema(description = "订单项实体类")
+@Table("order_item")
 public class OrderItem extends BaseLogicEntity {
 
    private static final long serialVersionUID = 1L;

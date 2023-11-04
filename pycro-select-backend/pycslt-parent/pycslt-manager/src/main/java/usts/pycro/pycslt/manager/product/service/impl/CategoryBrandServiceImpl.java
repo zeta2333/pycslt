@@ -34,12 +34,13 @@ public class CategoryBrandServiceImpl extends ServiceImpl<CategoryBrandMapper, C
      */
     @Override
     public List<Brand> findBrandByCategoryId(Long categoryId) {
-        return listAs(QueryWrapper.create()
+        return queryChain()
                 .select(BRAND.DEFAULT_COLUMNS)
-                .from(CATEGORY_BRAND)
-                .innerJoin(BRAND).on(CATEGORY_BRAND.BRAND_ID.eq(BRAND.ID))
+                .from(BRAND)
+                .innerJoin(CATEGORY_BRAND).on(CATEGORY_BRAND.BRAND_ID.eq(BRAND.ID))
                 .where(CATEGORY_BRAND.CATEGORY_ID.eq(categoryId))
-                .orderBy(CATEGORY_BRAND.ID, false), Brand.class);
+                .orderBy(CATEGORY_BRAND.ID, false)
+                .listAs(Brand.class);
     }
 
     /**

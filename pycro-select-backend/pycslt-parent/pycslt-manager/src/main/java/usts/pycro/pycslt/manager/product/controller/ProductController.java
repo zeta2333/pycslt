@@ -25,6 +25,20 @@ public class ProductController {
     private ProductService productService;
 
     /**
+     * 商品上下架
+     *
+     * @param id
+     * @param status
+     * @return
+     */
+    @GetMapping("/updateStatus/{id}/{status}")
+    public Result<?> updateStatus(@PathVariable("id") Long id,
+                                  @PathVariable("status") Integer status) {
+        productService.updateStatus(id, status);
+        return Result.ok(null);
+    }
+
+    /**
      * 商品审核
      *
      * @param id
@@ -32,7 +46,8 @@ public class ProductController {
      * @return
      */
     @GetMapping("/updateAuditStatus/{id}/{auditStatus}")
-    public Result<?> updateAuditStatus(@PathVariable Long id, @PathVariable Integer auditStatus) {
+    public Result<?> updateAuditStatus(@PathVariable Long id,
+                                       @PathVariable Integer auditStatus) {
         productService.updateAuditStatus(id, auditStatus);
         return Result.ok(null);
     }

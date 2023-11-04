@@ -16,7 +16,7 @@ import java.util.List;
  * @since 2023-10-31
  */
 @RestController
-@RequestMapping("/productDetails")
+@RequestMapping("/admin/product/productDetails")
 public class ProductDetailsController {
 
     @Autowired

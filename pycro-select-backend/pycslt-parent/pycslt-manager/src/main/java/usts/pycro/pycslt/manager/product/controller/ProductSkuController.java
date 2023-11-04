@@ -16,7 +16,7 @@ import java.util.List;
  * @since 2023-10-31
  */
 @RestController
-@RequestMapping("/productSku")
+@RequestMapping("/admin/product/productSku")
 public class ProductSkuController {
 
     @Autowired

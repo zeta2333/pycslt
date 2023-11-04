@@ -67,40 +67,58 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                         .queryWrapper(product -> QueryWrapper.create()
                                 .select(BRAND.NAME)
                                 .from(BRAND)
-                                .where(brandId != null ? BRAND.ID.eq(brandId) : BRAND.ID.isNull(true))),
+                                .where(BRAND.ID.eq(product.getBrandId()))),
                 category1NameBuilder -> category1NameBuilder
                         .field(Product::getCategory1Name)
                         .queryWrapper(product -> QueryWrapper.create()
                                 .select(CATEGORY.NAME)
                                 .from(CATEGORY)
-                                .where(category1Id != null ? CATEGORY.ID.eq(category1Id) : CATEGORY.ID.isNull(true))),
+                                .where(CATEGORY.ID.eq(product.getCategory1Id()))),
                 category2NameBuilder -> category2NameBuilder
                         .field(Product::getCategory2Name)
                         .queryWrapper(product -> QueryWrapper.create()
                                 .select(CATEGORY.NAME)
                                 .from(CATEGORY)
-                                .where(category2Id != null ? CATEGORY.ID.eq(category2Id) : CATEGORY.ID.isNull(true))),
+                                .where(CATEGORY.ID.eq(product.getCategory2Id()))),
                 category3NameBuilder -> category3NameBuilder
                         .field(Product::getCategory3Name)
                         .queryWrapper(product -> QueryWrapper.create()
                                 .select(CATEGORY.NAME)
                                 .from(CATEGORY)
-                                .where(category3Id != null ? CATEGORY.ID.eq(category3Id) : CATEGORY.ID.isNull(true)))
+                                .where(CATEGORY.ID.eq(product.getCategory3Id())))
         );
 
     }
 
     /**
-     * 商品审核
+     * 商品上下架
      *
      * @param id
-     * @param auditStatus
+     * @param status
+     */
+    @Override
+    public void updateStatus(Long id, Integer status) {
+        Product product = UpdateEntity.of(Product.class, id);
+        product.setStatus(status);
+        mapper.update(product);
+    }
+
+    /**
+     * 商品审核
+     *
+     * @param id          商品id
+     * @param auditStatus 审核状态
      */
     @Override
     public void updateAuditStatus(Long id, Integer auditStatus) {
         // 只修改部分字段
         Product product = UpdateEntity.of(Product.class, id);
         product.setAuditStatus(auditStatus);
+        if (auditStatus.equals(AuditStatusEnum.PASSED.getCode())) {
+            product.setAuditMessage(AuditStatusEnum.PASSED.getValue());
+        } else {
+            product.setAuditMessage(AuditStatusEnum.REFUSED.getValue());
+        }
         mapper.update(product);
     }
 
@@ -219,13 +237,13 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             // 销量
             productSku.setSaleNum(0);
             productSku.setStatus(ProductStatusEnum.INIT.getCode());
+            skuMapper.insertSelective(productSku);
         }
-        skuMapper.insertBatch(productSkuList);
 
         // 3 保存商品详情数据-->product_details表
         ProductDetails productDetails = new ProductDetails();
         productDetails.setProductId(product.getId());
         productDetails.setImageUrls(product.getDetailsImageUrls());
-        detailsMapper.insert(productDetails);
+        detailsMapper.insertSelective(productDetails);
     }
 }

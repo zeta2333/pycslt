@@ -55,4 +55,11 @@ public interface ProductService extends IService<Product> {
      * @param auditStatus
      */
     void updateAuditStatus(Long id, Integer auditStatus);
+
+    /**
+     * 商品上下架
+     * @param id
+     * @param status
+     */
+    void updateStatus(Long id, Integer status);
 }

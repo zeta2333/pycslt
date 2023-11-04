@@ -10,8 +10,8 @@ import lombok.Getter;
 @Getter
 public enum AuditStatusEnum {
     INIT(0, "初始值"),
-    PASSED(1, "通过"),
-    REFUSED(-1, "未通过")
+    PASSED(1, "审核通过"),
+    REFUSED(-1, "审核未通过")
     ;
 
 

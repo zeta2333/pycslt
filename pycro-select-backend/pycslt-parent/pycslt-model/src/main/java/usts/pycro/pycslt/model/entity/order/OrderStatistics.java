@@ -1,5 +1,6 @@
 package usts.pycro.pycslt.model.entity.order;
 
+import com.mybatisflex.annotation.Table;
 import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 import lombok.Data;
 
@@ -7,6 +8,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
+@Table("order_statistics")
 public class OrderStatistics extends BaseLogicEntity {
 
     private Date orderDate;
