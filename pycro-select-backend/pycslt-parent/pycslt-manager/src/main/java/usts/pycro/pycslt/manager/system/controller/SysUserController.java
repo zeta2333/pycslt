@@ -3,6 +3,8 @@ package usts.pycro.pycslt.manager.system.controller;
 import com.mybatisflex.core.paginate.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import usts.pycro.pycslt.common.log.annotation.Log;
+import usts.pycro.pycslt.common.log.enums.BusinessType;
 import usts.pycro.pycslt.manager.system.service.SysUserService;
 import usts.pycro.pycslt.model.dto.system.AssignRoleBo;
 import usts.pycro.pycslt.model.dto.system.SysUserBo;
@@ -23,10 +25,13 @@ public class SysUserController {
 
     /**
      * 为用户分配角色
+     *
      * @param assignRoleBo
      * @return
      */
     @PostMapping("/doAssign")
+    @Log(title = "分配角色给用户",
+            businessType = BusinessType.ADD)
     public Result<?> doAssign(@RequestBody AssignRoleBo assignRoleBo) {
         sysUserService.doAssign(assignRoleBo);
         return Result.ok(null);

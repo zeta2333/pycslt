@@ -3,6 +3,8 @@ package usts.pycro.pycslt.manager.product.controller;
 import com.mybatisflex.core.paginate.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import usts.pycro.pycslt.common.log.annotation.Log;
+import usts.pycro.pycslt.common.log.enums.BusinessType;
 import usts.pycro.pycslt.manager.product.service.ProductService;
 import usts.pycro.pycslt.model.dto.product.ProductBo;
 import usts.pycro.pycslt.model.entity.product.Product;
@@ -120,6 +122,9 @@ public class ProductController {
      * @return
      */
     @PostMapping("/page/{pageNum}/{pageSize}")
+    @Log(title = "分页查询商品列表",
+            businessType = BusinessType.SELECT,
+            isSaveResponseData = false)
     public Result<Page<Product>> page(@PathVariable("pageNum") Integer pageNum,
                                       @PathVariable("pageSize") Integer pageSize,
                                       @RequestBody ProductBo productBo) {

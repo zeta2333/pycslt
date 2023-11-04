@@ -55,11 +55,11 @@ public class CodeGen {
         // 设置根包
         globalConfig.getPackageConfig()
                 .setSourceDir("E:\\Project\\尚品甄选\\workspace\\pycro-select-backend\\pycslt-parent\\pycslt-manager\\src\\main\\java")
-                .setBasePackage("usts.pycro.pycslt.manager.order");
+                .setBasePackage("usts.pycro.pycslt.manager.system");
 
         // 设置表前缀和只生成哪些表，setGenerateTable 未配置时，生成所有表
         globalConfig.getStrategyConfig()
-                .setGenerateTable("order_info","order_statistics");
+                .setGenerateTable("sys_oper_log");
 
 
         // 设置生成 entity 并启用 Lombok
@@ -77,7 +77,7 @@ public class CodeGen {
         globalConfig.enableServiceImpl();
 
         // 设置生成Controller
-        globalConfig.enableController();
+        // globalConfig.enableController();
 
         // 可以单独配置某个列
         /*ColumnConfig columnConfig = new ColumnConfig();

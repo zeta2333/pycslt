@@ -3,6 +3,9 @@ package usts.pycro.pycslt.manager.system.controller;
 import com.mybatisflex.core.paginate.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import usts.pycro.pycslt.common.log.annotation.Log;
+import usts.pycro.pycslt.common.log.enums.BusinessType;
+import usts.pycro.pycslt.common.log.enums.OperatorType;
 import usts.pycro.pycslt.manager.system.service.SysRoleService;
 import usts.pycro.pycslt.manager.system.service.SysUserRoleService;
 import usts.pycro.pycslt.model.dto.system.AssignMenuBo;
@@ -29,6 +32,7 @@ public class SysRoleController {
 
     /**
      * 为角色分配菜单
+     *
      * @return
      */
     @PostMapping("/doAssign")
@@ -105,6 +109,9 @@ public class SysRoleController {
      * @return role
      */
     @PostMapping("/page/{pageNum}/{pageSize}")
+    @Log(title = "分页查询角色列表",
+            operatorType = OperatorType.MANAGE,
+            businessType = BusinessType.SELECT)
     public Result<Page<SysRole>> pageQuery(@RequestBody SysRoleBo sysRoleBo,
                                            @PathVariable("pageNum") Integer pageNum,
                                            @PathVariable("pageSize") Integer pageSize) {
