@@ -2,6 +2,8 @@ server:
   port: 6815
 # 配置数据库连接信息
 spring:
+  application:
+    name: pycslt-manager
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver

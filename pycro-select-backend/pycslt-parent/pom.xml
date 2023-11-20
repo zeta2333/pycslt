@@ -12,6 +12,9 @@
         <module>pycslt-common</module>
         <module>pycslt-model</module>
         <module>pycslt-manager</module>
+        <module>pycslt-server-gateway</module>
+        <module>pycslt-service</module>
+        <module>pycslt-service-client</module>
     </modules>
 
     <!-- 指定父工程 -->
@@ -30,11 +33,36 @@
         <lombok.version>1.18.20</lombok.version>
         <mybatis.version>3.0.1</mybatis.version>
         <mybatis-flex.version>1.7.3</mybatis-flex.version>
+
+        <!-- 微服务相关依赖版本 -->
+        <cloud.version>2022.0.2</cloud.version>
+        <alibaba.version>2022.0.0.0-RC2</alibaba.version>
+        <alipay.version>4.8.73.ALL</alipay.version>
     </properties>
 
-    <!-- 管理依赖，版本锁定 -->
+    <!-- 管理依赖，版本锁定，仅作声明，不会导入 -->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--导入支付宝支付sdk-->
+            <dependency>
+                <groupId>com.alipay.sdk</groupId>
+                <artifactId>alipay-sdk-java</artifactId>
+                <version>${alipay.version}</version>
+            </dependency>
             <!-- mybatis和spring boot整合的起步依赖 -->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
