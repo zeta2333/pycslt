@@ -1,13 +1,13 @@
 server:
-  port: 8511
+  port: 6816
 
 spring:
   application:
     name: service-product
-  cloud:
-    nacos:
-      discovery:
-        server-addr: localhost:8848
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: localhost:8848
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
