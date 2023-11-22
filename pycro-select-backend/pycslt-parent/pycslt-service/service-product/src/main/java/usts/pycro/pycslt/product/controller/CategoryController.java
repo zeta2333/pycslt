@@ -17,6 +17,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/api/product/category")
+// @CrossOrigin
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;

@@ -11,7 +11,10 @@ import lombok.Getter;
 public enum RedisKeyEnum {
 
     USER_LOGIN(1, "user:login:"),
-    USER_VALIDATE(2, "user:validate:");
+    USER_VALIDATE(2, "user:validate:"),
+
+    PRIMARY_CATEGORY(3,"category:primary")
+    ;
 
     private final Integer code;
     private final String value;

@@ -1,24 +1,29 @@
 server:
   port: 6816
-
 spring:
   application:
     name: service-product
-#  cloud:
-#    nacos:
-#      discovery:
-#        server-addr: localhost:8848
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${app.nacos.host}:${app.nacos.port}
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${app.mysql.host}:${app.mysql.port}/${app.mysql.dbname}?characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
     username: ${app.mysql.username}
     password: ${app.mysql.password}
+  data:
+    redis:
+      host: ${app.redis.host}
+      port: ${app.redis.port}
 
 mybatis:
   config-location: classpath:mybatis-config.xml
   mapper-locations: classpath:/mapper/*/*.xml
-
+mybatis-flex:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 app:
   mysql:
@@ -27,3 +32,9 @@ app:
     dbname: db_pycslt
     username: root
     password: 12345678
+  redis:
+    host: 192.168.73.128
+    port: 6379
+  nacos:
+    host: 192.168.73.128
+    port: 8848

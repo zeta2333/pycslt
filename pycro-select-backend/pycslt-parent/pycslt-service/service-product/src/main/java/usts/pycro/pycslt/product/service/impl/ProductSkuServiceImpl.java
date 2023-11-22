@@ -1,6 +1,5 @@
 package usts.pycro.pycslt.product.service.impl;
 
-import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import usts.pycro.pycslt.model.entity.product.ProductSku;
@@ -26,7 +25,7 @@ public class ProductSkuServiceImpl extends ServiceImpl<ProductSkuMapper, Product
      */
     @Override
     public List<ProductSku> selectProductBySale() {
-        return list(QueryWrapper.create()
+        return list(query()
                 .innerJoin(PRODUCT).on(PRODUCT.ID.eq(PRODUCT_SKU.PRODUCT_ID))
                 .where(PRODUCT.STATUS.eq(1))
                 .orderBy(PRODUCT_SKU.SALE_NUM.desc())

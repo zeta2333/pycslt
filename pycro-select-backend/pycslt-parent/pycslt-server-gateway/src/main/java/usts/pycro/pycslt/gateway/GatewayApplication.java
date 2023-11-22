@@ -1,8 +1,7 @@
-package usts.pycro.pycslt.product;
+package usts.pycro.pycslt.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
 
 /**
  * @author Pycro
@@ -10,9 +9,8 @@ import org.springframework.cache.annotation.EnableCaching;
  * 2023-11-20 10:50
  */
 @SpringBootApplication
-@EnableCaching
-public class ProductApplication {
+public class GatewayApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ProductApplication.class, args);
+        SpringApplication.run(GatewayApplication.class, args);
     }
 }
