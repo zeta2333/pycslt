@@ -1,4 +1,4 @@
-package usts.pycro.pycslt.model.dto.product;
+package usts.pycro.pycslt.model.bo.product;
 
 import lombok.Data;
 

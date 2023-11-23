@@ -2,8 +2,8 @@ package usts.pycro.pycslt.manager.system.service;
 
 import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.service.IService;
-import usts.pycro.pycslt.model.dto.system.AssignMenuBo;
-import usts.pycro.pycslt.model.dto.system.SysRoleBo;
+import usts.pycro.pycslt.model.bo.system.AssignMenuBo;
+import usts.pycro.pycslt.model.bo.system.SysRoleBo;
 import usts.pycro.pycslt.model.entity.system.SysRole;
 
 /**

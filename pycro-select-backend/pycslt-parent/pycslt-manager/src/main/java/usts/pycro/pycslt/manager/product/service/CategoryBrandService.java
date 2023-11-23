@@ -2,7 +2,7 @@ package usts.pycro.pycslt.manager.product.service;
 
 import com.mybatisflex.core.paginate.Page;
 import com.mybatisflex.core.service.IService;
-import usts.pycro.pycslt.model.dto.product.CategoryBrandBo;
+import usts.pycro.pycslt.model.bo.product.CategoryBrandBo;
 import usts.pycro.pycslt.model.entity.product.Brand;
 import usts.pycro.pycslt.model.entity.product.CategoryBrand;
 

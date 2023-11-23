@@ -6,7 +6,7 @@ import com.mybatisflex.spring.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import usts.pycro.pycslt.manager.order.mapper.OrderStatisticsMapper;
 import usts.pycro.pycslt.manager.order.service.OrderStatisticsService;
-import usts.pycro.pycslt.model.dto.order.OrderStatisticsBo;
+import usts.pycro.pycslt.model.bo.order.OrderStatisticsBo;
 import usts.pycro.pycslt.model.entity.order.OrderStatistics;
 import usts.pycro.pycslt.model.vo.order.OrderStatisticsVo;
 

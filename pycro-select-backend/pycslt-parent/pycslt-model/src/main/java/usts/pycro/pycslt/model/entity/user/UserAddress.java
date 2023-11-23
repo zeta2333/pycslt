@@ -1,11 +1,13 @@
 package usts.pycro.pycslt.model.entity.user;
 
+import com.mybatisflex.annotation.Table;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 
 @Data
 @Schema(description = "用户地址实体类")
+@Table("user_address")
 public class UserAddress extends BaseLogicEntity {
 
    private static final long serialVersionUID = 1L;

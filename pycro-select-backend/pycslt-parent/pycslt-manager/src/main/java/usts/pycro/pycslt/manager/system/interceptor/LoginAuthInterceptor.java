@@ -54,7 +54,7 @@ public class LoginAuthInterceptor implements HandlerInterceptor {
         }
         // 6 如果redis查询到数据，把查询到的用户信息放到ThreadLocal里面
         SysUser sysUser = JSON.parseObject(userInfo, SysUser.class);
-        AuthContextUtil.set(sysUser);
+        AuthContextUtil.setSysUser(sysUser);
         // 7 把redis用户信息更新过期时间
         redisTemplate.expire(RedisKeyEnum.USER_LOGIN.getValue() + token,
                 1440, TimeUnit.MINUTES);
@@ -65,7 +65,7 @@ public class LoginAuthInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         // 删除ThreadLocal
-        AuthContextUtil.remove();
+        AuthContextUtil.removeSysUser();
     }
 
     // 响应208状态码给前端

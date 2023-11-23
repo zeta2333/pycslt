@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import usts.pycro.pycslt.manager.order.service.OrderInfoService;
 import usts.pycro.pycslt.manager.order.service.OrderStatisticsService;
-import usts.pycro.pycslt.model.dto.order.OrderStatisticsBo;
+import usts.pycro.pycslt.model.bo.order.OrderStatisticsBo;
 import usts.pycro.pycslt.model.entity.order.OrderInfo;
 import usts.pycro.pycslt.model.vo.common.Result;
 import usts.pycro.pycslt.model.vo.order.OrderStatisticsVo;

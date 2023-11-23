@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import usts.pycro.pycslt.manager.system.mapper.SysRoleMapper;
 import usts.pycro.pycslt.manager.system.service.SysRoleMenuService;
 import usts.pycro.pycslt.manager.system.service.SysRoleService;
-import usts.pycro.pycslt.model.dto.system.AssignMenuBo;
-import usts.pycro.pycslt.model.dto.system.SysRoleBo;
+import usts.pycro.pycslt.model.bo.system.AssignMenuBo;
+import usts.pycro.pycslt.model.bo.system.SysRoleBo;
 import usts.pycro.pycslt.model.entity.system.SysRole;
 import usts.pycro.pycslt.model.entity.system.SysRoleMenu;
 

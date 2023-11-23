@@ -2,7 +2,7 @@ package usts.pycro.pycslt.product.service;
 
 import com.github.pagehelper.PageInfo;
 import com.mybatisflex.core.service.IService;
-import usts.pycro.pycslt.model.dto.h5.ProductSkuBo;
+import usts.pycro.pycslt.model.bo.h5.ProductSkuBo;
 import usts.pycro.pycslt.model.entity.product.Product;
 import usts.pycro.pycslt.model.entity.product.ProductSku;
 import usts.pycro.pycslt.model.vo.h5.ProductItemVo;

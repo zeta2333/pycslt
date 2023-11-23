@@ -15,9 +15,9 @@ import usts.pycro.pycslt.enums.RedisKeyEnum;
 import usts.pycro.pycslt.manager.system.mapper.SysUserMapper;
 import usts.pycro.pycslt.manager.system.service.SysUserRoleService;
 import usts.pycro.pycslt.manager.system.service.SysUserService;
-import usts.pycro.pycslt.model.dto.system.AssignRoleBo;
-import usts.pycro.pycslt.model.dto.system.LoginBo;
-import usts.pycro.pycslt.model.dto.system.SysUserBo;
+import usts.pycro.pycslt.model.bo.system.AssignRoleBo;
+import usts.pycro.pycslt.model.bo.system.LoginBo;
+import usts.pycro.pycslt.model.bo.system.SysUserBo;
 import usts.pycro.pycslt.model.entity.system.SysUser;
 import usts.pycro.pycslt.model.entity.system.SysUserRole;
 import usts.pycro.pycslt.model.vo.common.ResultCodeEnum;
@@ -25,6 +25,7 @@ import usts.pycro.pycslt.model.vo.system.LoginVo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import static usts.pycro.pycslt.model.entity.system.table.SysUserRoleTableDef.SYS_USER_ROLE;
@@ -75,7 +76,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                         .where(SYS_USER.USER_NAME.eq(userName))
         );
         // 3. 如果查不到对应信息，则表示用户不存在，返回错误信息
-        if (sysUser == null) {
+        if (Objects.isNull(sysUser)) {
             throw new ServiceException(ResultCodeEnum.LOGIN_ERROR);
         }
         // 4. 查询到用户信息，表示用户信息存在

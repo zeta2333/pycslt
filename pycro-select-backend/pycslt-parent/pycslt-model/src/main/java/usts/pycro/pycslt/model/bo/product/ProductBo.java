@@ -1,7 +1,6 @@
-package usts.pycro.pycslt.model.dto.product;
+package usts.pycro.pycslt.model.bo.product;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 

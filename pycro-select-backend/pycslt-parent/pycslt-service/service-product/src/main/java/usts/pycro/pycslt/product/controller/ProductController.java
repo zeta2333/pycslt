@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import usts.pycro.pycslt.model.dto.h5.ProductSkuBo;
+import usts.pycro.pycslt.model.bo.h5.ProductSkuBo;
 import usts.pycro.pycslt.model.entity.product.Product;
 import usts.pycro.pycslt.model.entity.product.ProductSku;
 import usts.pycro.pycslt.model.vo.common.Result;

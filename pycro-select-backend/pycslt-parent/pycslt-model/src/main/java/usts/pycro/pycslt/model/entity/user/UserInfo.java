@@ -1,5 +1,6 @@
 package usts.pycro.pycslt.model.entity.user;
 
+import com.mybatisflex.annotation.Table;
 import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -8,6 +9,7 @@ import java.util.Date;
 
 @Data
 @Schema(description = "用户实体类")
+@Table("user_info")
 public class UserInfo extends BaseLogicEntity {
 
    private static final long serialVersionUID = 1L;

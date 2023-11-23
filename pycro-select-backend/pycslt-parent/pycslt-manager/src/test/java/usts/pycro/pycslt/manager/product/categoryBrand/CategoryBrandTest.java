@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import usts.pycro.pycslt.manager.product.service.CategoryBrandService;
-import usts.pycro.pycslt.model.dto.product.CategoryBrandBo;
+import usts.pycro.pycslt.model.bo.product.CategoryBrandBo;
 import usts.pycro.pycslt.model.entity.product.Brand;
 import usts.pycro.pycslt.model.entity.product.CategoryBrand;
 

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import usts.pycro.pycslt.common.log.annotation.Log;
 import usts.pycro.pycslt.common.log.enums.BusinessType;
 import usts.pycro.pycslt.manager.product.service.ProductService;
-import usts.pycro.pycslt.model.dto.product.ProductBo;
+import usts.pycro.pycslt.model.bo.product.ProductBo;
 import usts.pycro.pycslt.model.entity.product.Product;
 import usts.pycro.pycslt.model.vo.common.Result;
 

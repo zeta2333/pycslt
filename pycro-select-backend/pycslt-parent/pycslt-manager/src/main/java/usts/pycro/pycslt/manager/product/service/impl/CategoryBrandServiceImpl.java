@@ -6,7 +6,7 @@ import com.mybatisflex.spring.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import usts.pycro.pycslt.manager.product.mapper.CategoryBrandMapper;
 import usts.pycro.pycslt.manager.product.service.CategoryBrandService;
-import usts.pycro.pycslt.model.dto.product.CategoryBrandBo;
+import usts.pycro.pycslt.model.bo.product.CategoryBrandBo;
 import usts.pycro.pycslt.model.entity.product.Brand;
 import usts.pycro.pycslt.model.entity.product.CategoryBrand;
 

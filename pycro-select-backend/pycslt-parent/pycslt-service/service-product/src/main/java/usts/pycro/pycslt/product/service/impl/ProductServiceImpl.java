@@ -6,7 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import usts.pycro.pycslt.model.dto.h5.ProductSkuBo;
+import usts.pycro.pycslt.model.bo.h5.ProductSkuBo;
 import usts.pycro.pycslt.model.entity.base.BaseEntity;
 import usts.pycro.pycslt.model.entity.product.Product;
 import usts.pycro.pycslt.model.entity.product.ProductDetails;

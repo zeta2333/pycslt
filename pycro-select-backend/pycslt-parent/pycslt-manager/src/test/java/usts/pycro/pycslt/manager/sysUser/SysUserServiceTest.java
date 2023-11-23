@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import usts.pycro.pycslt.manager.system.service.SysUserRoleService;
 import usts.pycro.pycslt.manager.system.service.SysUserService;
-import usts.pycro.pycslt.model.dto.system.SysUserBo;
+import usts.pycro.pycslt.model.bo.system.SysUserBo;
 import usts.pycro.pycslt.model.entity.system.SysUser;
 
 import static usts.pycro.pycslt.model.entity.system.table.SysUserRoleTableDef.SYS_USER_ROLE;

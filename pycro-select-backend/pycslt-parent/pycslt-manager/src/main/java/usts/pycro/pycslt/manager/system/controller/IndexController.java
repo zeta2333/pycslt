@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import usts.pycro.pycslt.manager.system.service.SysMenuService;
 import usts.pycro.pycslt.manager.system.service.SysUserService;
 import usts.pycro.pycslt.manager.util.service.ValidateCodeService;
-import usts.pycro.pycslt.model.dto.system.LoginBo;
+import usts.pycro.pycslt.model.bo.system.LoginBo;
 import usts.pycro.pycslt.model.entity.system.SysUser;
 import usts.pycro.pycslt.model.vo.common.Result;
 import usts.pycro.pycslt.model.vo.system.LoginVo;
@@ -62,7 +62,7 @@ public class IndexController {
     @GetMapping("/getUserInfo")
     public Result<SysUser> getUserInfo() {
         // 从threadLocal查询用户信息
-        SysUser sysUser = AuthContextUtil.get();
+        SysUser sysUser = AuthContextUtil.getSysUser();
         // 返回用户信息
         return Result.ok(sysUser);
     }

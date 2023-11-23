@@ -1,4 +1,4 @@
-package usts.pycro.pycslt.model.dto.h5;
+package usts.pycro.pycslt.model.bo.h5;
 
 import usts.pycro.pycslt.model.entity.order.OrderItem;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Data
-public class OrderInfoDto {
+public class OrderInfoBo {
 
     //送货地址id
     private Long userAddressId;

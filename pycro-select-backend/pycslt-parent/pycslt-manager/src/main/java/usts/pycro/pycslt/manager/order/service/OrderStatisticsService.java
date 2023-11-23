@@ -1,7 +1,7 @@
 package usts.pycro.pycslt.manager.order.service;
 
 import com.mybatisflex.core.service.IService;
-import usts.pycro.pycslt.model.dto.order.OrderStatisticsBo;
+import usts.pycro.pycslt.model.bo.order.OrderStatisticsBo;
 import usts.pycro.pycslt.model.entity.order.OrderStatistics;
 import usts.pycro.pycslt.model.vo.order.OrderStatisticsVo;
 

@@ -36,7 +36,7 @@ public class CodeGen {
 
     public static DataSource createDataSourceConfig(String dbName, String username, String password) {
         HikariDataSource dataSource = new HikariDataSource();
-        dataSource.setJdbcUrl(String.format("jdbc:mysql://192.168.73.128:3306/%s?characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true", dbName));
+        dataSource.setJdbcUrl("jdbc:mysql://192.168.73.128:3306/${dbName}?characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true");
         dataSource.setUsername(username);
         dataSource.setPassword(password);
         return dataSource;
@@ -54,12 +54,12 @@ public class CodeGen {
 
         // 设置根包
         globalConfig.getPackageConfig()
-                .setSourceDir("E:\\Project\\尚品甄选\\workspace\\pycro-select-backend\\pycslt-parent\\pycslt-service\\service-product\\src\\main\\java")
-                .setBasePackage("usts.pycro.pycslt.product");
+                .setSourceDir("E:\\Project\\尚品甄选\\workspace\\pycro-select-backend\\pycslt-parent\\pycslt-service\\service-user\\src\\main\\java")
+                .setBasePackage("usts.pycro.pycslt.user");
 
         // 设置表前缀和只生成哪些表，setGenerateTable 未配置时，生成所有表
         globalConfig.getStrategyConfig()
-                .setGenerateTable("product_details");
+                .setGenerateTable("user_info");
 
 
         // 设置生成 entity 并启用 Lombok
@@ -71,13 +71,13 @@ public class CodeGen {
                 .setMapperAnnotation(true);
 
         // 设置生成service
-        // globalConfig.enableService();
+        globalConfig.enableService();
 
         // 设置生成serviceImpl
-        // globalConfig.enableServiceImpl();
+        globalConfig.enableServiceImpl();
 
         // 设置生成Controller
-        // globalConfig.enableController();
+        globalConfig.enableController();
 
         // 可以单独配置某个列
         /*ColumnConfig columnConfig = new ColumnConfig();

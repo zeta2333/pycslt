@@ -1,4 +1,4 @@
-package usts.pycro.pycslt.model.dto.system;
+package usts.pycro.pycslt.model.bo.system;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

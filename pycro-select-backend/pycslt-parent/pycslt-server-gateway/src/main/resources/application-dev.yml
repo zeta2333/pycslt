@@ -26,8 +26,18 @@ spring:
           uri: lb://service-product
           predicates:
             - Path=/*/product/**
-
+        - id: service-user
+          uri: lb://service-user
+          predicates:
+            - Path=/*/user/**
+  data:
+    redis:
+      host: ${app.redis.host}
+      port: ${app.redis.port}
 app:
   nacos:
     host: 192.168.73.128
     port: 8848
+  redis:
+    host: 192.168.73.128
+    port: 6379

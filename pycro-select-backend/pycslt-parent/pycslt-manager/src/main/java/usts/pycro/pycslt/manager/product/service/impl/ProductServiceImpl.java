@@ -12,7 +12,7 @@ import usts.pycro.pycslt.manager.product.mapper.ProductDetailsMapper;
 import usts.pycro.pycslt.manager.product.mapper.ProductMapper;
 import usts.pycro.pycslt.manager.product.mapper.ProductSkuMapper;
 import usts.pycro.pycslt.manager.product.service.ProductService;
-import usts.pycro.pycslt.model.dto.product.ProductBo;
+import usts.pycro.pycslt.model.bo.product.ProductBo;
 import usts.pycro.pycslt.model.entity.product.Product;
 import usts.pycro.pycslt.model.entity.product.ProductDetails;
 import usts.pycro.pycslt.model.entity.product.ProductSku;

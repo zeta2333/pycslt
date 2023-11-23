@@ -1,4 +1,4 @@
-package usts.pycro.pycslt.model.dto.order;
+package usts.pycro.pycslt.model.bo.order;
 
 import com.github.xiaoymin.knife4j.core.util.StrUtil;
 import io.swagger.v3.oas.annotations.media.Schema;

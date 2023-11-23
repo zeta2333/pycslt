@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import usts.pycro.pycslt.manager.product.mapper.ProductMapper;
 import usts.pycro.pycslt.manager.product.service.ProductService;
-import usts.pycro.pycslt.model.dto.product.ProductBo;
+import usts.pycro.pycslt.model.bo.product.ProductBo;
 import usts.pycro.pycslt.model.entity.product.Product;
 
 import java.util.ArrayList;

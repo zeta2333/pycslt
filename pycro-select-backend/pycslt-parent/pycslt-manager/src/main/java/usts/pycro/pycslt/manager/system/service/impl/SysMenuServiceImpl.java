@@ -106,7 +106,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     @Override
     public List<SysMenuVo> findMenusByUserId() {
         // 获取当前用户id
-        Long userId = AuthContextUtil.get().getId();
+        Long userId = AuthContextUtil.getSysUser().getId();
         // 根据用户id查询菜单(注意去重)
         List<SysMenu> sysMenus = mapper.selectListByQuery(QueryWrapper.create()
                 .select(distinct(SYS_MENU.DEFAULT_COLUMNS))

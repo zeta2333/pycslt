@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import usts.pycro.pycslt.common.log.annotation.Log;
 import usts.pycro.pycslt.common.log.enums.BusinessType;
 import usts.pycro.pycslt.manager.system.service.SysUserService;
-import usts.pycro.pycslt.model.dto.system.AssignRoleBo;
-import usts.pycro.pycslt.model.dto.system.SysUserBo;
+import usts.pycro.pycslt.model.bo.system.AssignRoleBo;
+import usts.pycro.pycslt.model.bo.system.SysUserBo;
 import usts.pycro.pycslt.model.entity.system.SysUser;
 import usts.pycro.pycslt.model.vo.common.Result;
 

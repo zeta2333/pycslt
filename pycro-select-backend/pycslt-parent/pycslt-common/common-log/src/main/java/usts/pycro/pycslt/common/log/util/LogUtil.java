@@ -62,6 +62,6 @@ public class LogUtil {
                 sysOperLog.setOperParam(params);
             }
         }
-        sysOperLog.setOperName(AuthContextUtil.get().getUserName());
+        sysOperLog.setOperName(AuthContextUtil.getSysUser().getUserName());
     }
 }
