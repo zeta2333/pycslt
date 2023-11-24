@@ -12,6 +12,7 @@ import usts.pycro.pycslt.model.entity.product.ProductSku;
 import usts.pycro.pycslt.model.vo.common.Result;
 import usts.pycro.pycslt.model.vo.h5.ProductItemVo;
 import usts.pycro.pycslt.product.service.ProductService;
+import usts.pycro.pycslt.product.service.ProductSkuService;
 
 import java.io.Serializable;
 import java.util.List;
@@ -30,8 +31,24 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private ProductSkuService productSkuService;
+
+
+    /**
+     * 远程调用：根据skuId获取productSku信息
+     *
+     * @param skuId
+     * @return
+     */
+    @GetMapping("/getBySkuId/{skuId}")
+    public ProductSku getBySkuId(@PathVariable Long skuId) {
+        return productSkuService.getById(skuId);
+    }
+
     /**
      * 查询商品详情
+     *
      * @param skuId
      * @return
      */
