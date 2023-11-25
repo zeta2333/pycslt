@@ -1,5 +1,6 @@
 package usts.pycro.pycslt.cart.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -10,7 +11,6 @@ import usts.pycro.pycslt.enums.RedisKeyEnum;
 import usts.pycro.pycslt.feign.product.ProductFeignClient;
 import usts.pycro.pycslt.model.entity.h5.CartInfo;
 import usts.pycro.pycslt.model.entity.product.ProductSku;
-import usts.pycro.pycslt.model.entity.user.UserInfo;
 import usts.pycro.pycslt.utils.AuthContextUtil;
 
 import java.util.Date;
@@ -32,6 +32,66 @@ public class CartServiceImpl implements CartService {
     private ProductFeignClient productFeignClient;
 
     /**
+     * 清空购物车
+     */
+    @Override
+    public void clearCart() {
+        // 1 获取用户信息 构建cartKey
+        String cartKey = getCartKey();
+        // redis清空数据
+        redisTemplate.delete(cartKey);
+    }
+
+    /**
+     * 更新购物车商品全部选中状态
+     *
+     * @param isChecked
+     */
+    @Override
+    public void allCheckCart(Integer isChecked) {
+        // 1 获取用户信息 构建cartKey
+        String cartKey = getCartKey();
+        // 从redis中获取用户的购物车信息
+        List<Object> values = redisTemplate.opsForHash().values(cartKey);
+        if (CollectionUtil.isEmpty(values)) {
+            return;
+        }
+        // 更新cartInfo状态值
+        values.forEach(value -> {
+            CartInfo cartInfo = JSON.parseObject(value.toString(), CartInfo.class);
+            cartInfo.setIsChecked(isChecked);
+            // 将更新后的数据存入redis
+            redisTemplate.opsForHash().put(cartKey,
+                    String.valueOf(cartInfo.getSkuId()),
+                    JSON.toJSONString(cartInfo));
+        });
+    }
+
+    /**
+     * 更新购物车商品选中状态
+     *
+     * @param skuId
+     * @param isChecked
+     */
+    @Override
+    public void checkCart(Long skuId, Integer isChecked) {
+        // 1 获取用户信息 构建cartKey
+        String cartKey = getCartKey();
+        // 更新redis中的数据
+        Object cartInfoObj = redisTemplate.opsForHash().get(cartKey, String.valueOf(skuId));
+        // 如果值不存在，则直接结束.
+        if (Objects.isNull(cartInfoObj)) {
+            return;
+        }
+        CartInfo cartInfo = JSON.parseObject(cartInfoObj.toString(), CartInfo.class);
+        cartInfo.setIsChecked(isChecked);
+        // 将更新后的数据再次存到redis中
+        redisTemplate.opsForHash().put(cartKey,
+                String.valueOf(skuId),
+                JSON.toJSONString(cartInfo));
+    }
+
+    /**
      * 删除购物车中的商品
      *
      * @param skuId
@@ -39,8 +99,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public void deleteCart(Long skuId) {
         // 1 获取用户信息 构建cartKey
-        Long userId = AuthContextUtil.getUserInfo().getId();
-        String cartKey = getCartKey(userId);
+        String cartKey = getCartKey();
         // 2 根据key和field删除
         redisTemplate.opsForHash().delete(cartKey, String.valueOf(skuId));
     }
@@ -53,8 +112,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<CartInfo> cartList() {
         // 1 获取用户信息 构建cartKey
-        Long userId = AuthContextUtil.getUserInfo().getId();
-        String cartKey = getCartKey(userId);
+        String cartKey = getCartKey();
         // 从redis中查询所有的cartInfo
         return redisTemplate.opsForHash().values(cartKey).stream()
                 .map(value -> JSON.parseObject(value.toString(), CartInfo.class))
@@ -70,11 +128,9 @@ public class CartServiceImpl implements CartService {
      */
     @Override
     public void addToCart(Long skuId, Integer skuNum) {
-        // 1 必须处于登录状态，获取用户信息
-        UserInfo userInfo = AuthContextUtil.getUserInfo();
-        Long userId = userInfo.getId();
-        // 构建hash的key
-        String cartKey = getCartKey(userId);
+        // 1 必须处于登录状态，获取用户信息  构建hash的key
+        Long userId = AuthContextUtil.getUserInfo().getId();
+        String cartKey = getCartKey();
         // 2 从redis获取购物车信息
         // hash类型  key:cartKey   field:skuId   value:cartInfo
         Object cartInfoObj = redisTemplate.opsForHash().get(cartKey, String.valueOf(skuId));
@@ -115,10 +171,10 @@ public class CartServiceImpl implements CartService {
     /**
      * 根据userId构建cartKey
      *
-     * @param userId
      * @return
      */
-    private String getCartKey(Long userId) {
+    private String getCartKey() {
+        Long userId = AuthContextUtil.getUserInfo().getId();
         return RedisKeyEnum.USER_CART.getValue() + userId;
     }
 }

@@ -25,6 +25,46 @@ public class CartController {
     private CartService cartService;
 
     /**
+     * 清空购物车
+     *
+     * @return
+     */
+    @Operation(summary = "清空购物车")
+    @GetMapping("/auth/clearCart")
+    public Result<?> clearCart() {
+        cartService.clearCart();
+        return Result.ok(null);
+    }
+
+    /**
+     * 更新购物车商品全部选中状态
+     *
+     * @param isChecked
+     * @return
+     */
+    @Operation(summary = "更新购物车商品全部选中状态")
+    @GetMapping("/auth/allCheckCart/{isChecked}")
+    public Result<?> allCheckCart(@PathVariable(value = "isChecked") Integer isChecked) {
+        cartService.allCheckCart(isChecked);
+        return Result.ok(null);
+    }
+
+    /**
+     * 更新购物车商品选中状态
+     *
+     * @param skuId
+     * @param isChecked
+     * @return
+     */
+    @Operation(summary = "更新购物车商品选中状态")
+    @GetMapping("/auth/checkCart/{skuId}/{isChecked}")
+    public Result<?> checkCart(@PathVariable(value = "skuId") Long skuId,
+                               @PathVariable(value = "isChecked") Integer isChecked) {
+        cartService.checkCart(skuId, isChecked);
+        return Result.ok(null);
+    }
+
+    /**
      * 删除购物车的商品
      *
      * @param skuId

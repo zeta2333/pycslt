@@ -31,4 +31,24 @@ public interface CartService {
      * @param skuId
      */
     void deleteCart(Long skuId);
+
+    /**
+     * 更新购物车商品选中状态
+     *
+     * @param skuId
+     * @param isChecked
+     */
+    void checkCart(Long skuId, Integer isChecked);
+
+    /**
+     * 更新购物车商品全部选中状态
+     *
+     * @param isChecked
+     */
+    void allCheckCart(Integer isChecked);
+
+    /**
+     * 清空购物车
+     */
+    void clearCart();
 }
