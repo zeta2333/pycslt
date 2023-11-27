@@ -1,47 +1,51 @@
-server:
-  port: 8500
-spring:
-  application:
-    name: pycslt-server-gateway
-  cloud:
-    nacos:
-      discovery:
-        server-addr: ${app.nacos.host}:${app.nacos.port}
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOriginPatterns: "*"
-            # 允许请求中携带的头信息
-            allowedHeaders: "*"
-            # 运行跨域的请求方式
-            allowedMethods: "*"
-            # 跨域检测的有效期,单位s
-            maxAge: 36000
-      routes:
-        - id: service-product
-          uri: lb://service-product
-          predicates:
-            - Path=/*/product/**
-        - id: service-user
-          uri: lb://service-user
-          predicates:
-            - Path=/*/user/**
-        - id: service-cart
-          uri: lb://service-cart
-          predicates:
-            - Path=/api/order/cart/**
-  data:
-    redis:
-      host: ${app.redis.host}
-      port: ${app.redis.port}
-app:
-  nacos:
-    host: 192.168.73.128
-    port: 8848
-  redis:
-    host: 192.168.73.128
-    port: 6379
+#server:
+#  port: 6810
+#spring:
+#  application:
+#    name: pycslt-server-gateway
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: ${app.nacos.host}:${app.nacos.port}
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true
+#      globalcors:
+#        cors-configurations:
+#          '[/**]':
+#            allowedOriginPatterns: "*"
+#            # 允许请求中携带的头信息
+#            allowedHeaders: "*"
+#            # 运行跨域的请求方式
+#            allowedMethods: "*"
+#            # 跨域检测的有效期,单位s
+#            maxAge: 36000
+#      routes:
+#        - id: service-product
+#          uri: lb://service-product
+#          predicates:
+#            - Path=/*/product/**
+#        - id: service-user
+#          uri: lb://service-user
+#          predicates:
+#            - Path=/*/user/**
+#        - id: service-cart
+#          uri: lb://service-cart
+#          predicates:
+#            - Path=/api/order/cart/**
+#        - id: service-order
+#          uri: lb://service-order
+#          predicates:
+#            - Path=/api/order/orderInfo/**
+#  data:
+#    redis:
+#      host: ${app.redis.host}
+#      port: ${app.redis.port}
+#app:
+#  nacos:
+#    host: 192.168.73.128
+#    port: 8848
+#  redis:
+#    host: 192.168.73.128
+#    port: 6379

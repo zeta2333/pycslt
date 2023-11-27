@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: ${app.nacos.host}:${app.nacos.port}
+  config:
+    import:
+      - nacos:service-order-dev.yml
+
+app:
+  nacos:
+    host: 192.168.73.128
+    port: 8848

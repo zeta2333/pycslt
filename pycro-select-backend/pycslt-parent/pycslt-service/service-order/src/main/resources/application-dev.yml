@@ -1,0 +1,38 @@
+server:
+  port: 6819
+
+spring:
+  application:
+    name: service-order
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${app.nacos.host}:${app.nacos.port}
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${app.mysql.host}:${app.mysql.port}/${app.mysql.dbname}?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=true
+    username: ${app.mysql.username}
+    password: ${app.mysql.password}
+  data:
+    redis:
+      host: ${app.redis.host}
+      port: ${app.redis.port}
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*/*.xml
+
+app:
+  mysql:
+    host: 192.168.73.128
+    port: 3306
+    dbname: db_pycslt
+    username: root
+    password: 12345678
+  redis:
+    host: 192.168.73.128
+    port: 6379
+  nacos:
+    host: 192.168.73.128
+    port: 8848

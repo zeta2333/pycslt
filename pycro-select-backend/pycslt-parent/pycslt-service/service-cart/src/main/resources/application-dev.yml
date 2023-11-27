@@ -1,22 +1,22 @@
-server:
-  port: 6818
-
-spring:
-  application:
-    name: service-cart
-  cloud:
-    nacos:
-      discovery:
-        server-addr: ${app.nacos.host}:${app.nacos.port}
-  data:
-    redis:
-      host: ${app.redis.host}
-      port: ${app.redis.port}
-
-app:
-  redis:
-    host: 192.168.73.128
-    port: 6379
-  nacos:
-    host: 192.168.73.128
-    port: 8848
+#server:
+#  port: 6818
+#
+#spring:
+#  application:
+#    name: service-cart
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: ${app.nacos.host}:${app.nacos.port}
+#  data:
+#    redis:
+#      host: ${app.redis.host}
+#      port: ${app.redis.port}
+#
+#app:
+#  redis:
+#    host: 192.168.73.128
+#    port: 6379
+#  nacos:
+#    host: 192.168.73.128
+#    port: 8848

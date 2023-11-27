@@ -13,7 +13,7 @@ public class OrderInfoBo {
     private Long userAddressId;
 
     //运费
-    private BigDecimal feightFee;
+    private BigDecimal freightFee;
 
     //备注
     private String remark;

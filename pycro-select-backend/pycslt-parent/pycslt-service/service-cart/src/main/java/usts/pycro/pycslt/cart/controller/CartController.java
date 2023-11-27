@@ -24,8 +24,32 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
+
     /**
      * 清空购物车
+     *
+     * @return
+     */
+    @GetMapping(value = "/auth/deleteChecked")
+    public Result<?> deleteChecked() {
+        cartService.deleteChecked();
+        return Result.ok(null);
+    }
+
+
+    /**
+     * 远程调用
+     *
+     * @return
+     */
+    @Operation(summary = "选中的购物车")
+    @GetMapping(value = "/auth/getAllChecked")
+    public List<CartInfo> getAllChecked() {
+        return cartService.getAllChecked();
+    }
+
+    /**
+     * 清空商品
      *
      * @return
      */

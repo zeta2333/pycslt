@@ -14,7 +14,7 @@ import usts.pycro.pycslt.common.annotation.EnableUserLoginAuthInterceptor;
 
 // 排除数据库的自动化配置，Cart微服务不需要访问数据库
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-@EnableFeignClients({"usts.pycro.pycslt"})
+@EnableFeignClients({"usts.pycro.pycslt.feign"})
 @EnableUserLoginAuthInterceptor //用户相关模块，需要登录状态
 public class CartApplication {
 

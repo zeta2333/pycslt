@@ -33,7 +33,7 @@
         <lombok.version>1.18.20</lombok.version>
         <mybatis.version>3.0.1</mybatis.version>
         <mybatis-flex.version>1.7.3</mybatis-flex.version>
-        <manifold-version>2023.1.29</manifold-version>
+        <manifold.version>2023.1.29</manifold.version>
 
         <!-- 微服务相关依赖版本 -->
         <cloud.version>2022.0.2</cloud.version>
@@ -112,6 +112,21 @@
             <artifactId>mybatis-flex-codegen</artifactId>
             <version>${mybatis-flex.version}</version>
         </dependency>
+
+
+        <!-- manifold-science -->
+        <dependency>
+            <groupId>systems.manifold</groupId>
+            <artifactId>manifold-science</artifactId>
+            <version>${manifold.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>systems.manifold</groupId>
+            <artifactId>manifold-ext-rt</artifactId>
+            <version>${manifold.version}</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
@@ -150,7 +165,17 @@
                         <path>
                             <groupId>systems.manifold</groupId>
                             <artifactId>manifold-strings</artifactId>
-                            <version>${manifold-version}</version>
+                            <version>${manifold.version}</version>
+                        </path>
+                        <!-- <path> -->
+                        <!--     <groupId>systems.manifold</groupId> -->
+                        <!--     <artifactId>manifold-ext</artifactId> -->
+                        <!--     <version>${manifold.version}</version> -->
+                        <!-- </path> -->
+                        <path>
+                            <groupId>systems.manifold</groupId>
+                            <artifactId>manifold-templates</artifactId>
+                            <version>${manifold.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>

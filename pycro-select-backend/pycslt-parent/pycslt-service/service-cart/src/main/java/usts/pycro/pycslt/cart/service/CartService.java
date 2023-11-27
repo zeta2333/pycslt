@@ -48,7 +48,19 @@ public interface CartService {
     void allCheckCart(Integer isChecked);
 
     /**
-     * 清空购物车
+     * 清空商品
      */
     void clearCart();
+
+    /**
+     * 选中的购物车
+     *
+     * @return
+     */
+    List<CartInfo> getAllChecked();
+
+    /**
+     * 清空购物车
+     */
+    void deleteChecked();
 }
