@@ -54,4 +54,20 @@ public interface OrderInfoService extends IService<OrderInfo> {
      * @return
      */
     PageInfo<OrderInfo> findUserPage(Integer page, Integer limit, Integer orderStatus);
+
+    /**
+     * 根据订单编号获取订单信息
+     *
+     * @param orderNo
+     * @return
+     */
+    OrderInfo getByOrderNo(String orderNo);
+
+    /**
+     * 更新订单状态
+     *
+     * @param orderNo
+     * @param orderStatus
+     */
+    void updateOrderStatus(String orderNo, Integer orderStatus);
 }

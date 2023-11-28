@@ -37,12 +37,12 @@ public class CartServiceImpl implements CartService {
     @Override
     public void deleteChecked() {
         String cartKey = getCartKey();
-        List<Object> cartInfoJsons = redisTemplate.opsForHash().values(cartKey);
-        if (CollectionUtil.isEmpty(cartInfoJsons)) {
+        List<Object> cartInfoObjects = redisTemplate.opsForHash().values(cartKey);
+        if (CollectionUtil.isEmpty(cartInfoObjects)) {
             return;
         }
-        cartInfoJsons
-                .map(cartInfoJson -> JSON.parseObject(cartInfoJson.toString(), CartInfo.class))
+        cartInfoObjects
+                .map(cartInfoObject -> JSON.parseObject(cartInfoObject.toString(), CartInfo.class))
                 .filter(cartInfo -> cartInfo.getIsChecked().equals(CartInfoCheckStatus.CHECKED.ordinal()))
                 .forEach(cartInfo -> redisTemplate.opsForHash().delete(cartKey, String.valueOf(cartInfo.getSkuId())));
     }

@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import usts.pycro.pycslt.model.bo.h5.ProductSkuBo;
+import usts.pycro.pycslt.model.bo.product.SkuSaleBo;
 import usts.pycro.pycslt.model.entity.product.Product;
 import usts.pycro.pycslt.model.entity.product.ProductSku;
 import usts.pycro.pycslt.model.vo.common.Result;
@@ -33,6 +34,18 @@ public class ProductController {
 
     @Autowired
     private ProductSkuService productSkuService;
+
+    /**
+     * 远程调用；更新商品sku销量
+     *
+     * @param skuSaleBoList
+     * @return
+     */
+    @Operation(summary = "更新商品sku销量")
+    @PostMapping("updateSkuSaleNum")
+    public Boolean updateSkuSaleNum(@RequestBody List<SkuSaleBo> skuSaleBoList) {
+        return productService.updateSkuSaleNum(skuSaleBoList);
+    }
 
 
     /**

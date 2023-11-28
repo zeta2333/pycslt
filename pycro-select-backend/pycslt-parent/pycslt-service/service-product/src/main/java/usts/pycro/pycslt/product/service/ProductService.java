@@ -3,9 +3,12 @@ package usts.pycro.pycslt.product.service;
 import com.github.pagehelper.PageInfo;
 import com.mybatisflex.core.service.IService;
 import usts.pycro.pycslt.model.bo.h5.ProductSkuBo;
+import usts.pycro.pycslt.model.bo.product.SkuSaleBo;
 import usts.pycro.pycslt.model.entity.product.Product;
 import usts.pycro.pycslt.model.entity.product.ProductSku;
 import usts.pycro.pycslt.model.vo.h5.ProductItemVo;
+
+import java.util.List;
 
 /**
  * 商品 服务层。
@@ -32,4 +35,12 @@ public interface ProductService extends IService<Product> {
      * @return
      */
     ProductItemVo item(Long skuId);
+
+    /**
+     * 更新商品sku销量
+     *
+     * @param skuSaleBoList
+     * @return
+     */
+    Boolean updateSkuSaleNum(List<SkuSaleBo> skuSaleBoList);
 }

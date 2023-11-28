@@ -27,6 +27,34 @@ public class OrderInfoController {
 
 
     /**
+     * 远程调用：更新订单状态
+     *
+     * @param orderNo
+     * @param orderStatus
+     * @return
+     */
+    @GetMapping("auth/updateOrderStatusPayed/{orderNo}/{orderStatus}")
+    public Result<?> updateOrderStatus(@PathVariable(value = "orderNo") String orderNo,
+                                       @PathVariable(value = "orderStatus") Integer orderStatus) {
+        orderInfoService.updateOrderStatus(orderNo, orderStatus);
+        return Result.ok(null);
+    }
+
+
+    /**
+     * 远程调用：根据订单编号获取订单信息
+     *
+     * @param orderNo
+     * @return
+     */
+    @Operation(summary = "获取订单信息")
+    @GetMapping("auth/getOrderInfoByOrderNo/{orderNo}")
+    public OrderInfo getOrderInfoByOrderNo(@PathVariable String orderNo) {
+        return orderInfoService.getByOrderNo(orderNo);
+    }
+
+
+    /**
      * 获取订单分页列表
      *
      * @param page

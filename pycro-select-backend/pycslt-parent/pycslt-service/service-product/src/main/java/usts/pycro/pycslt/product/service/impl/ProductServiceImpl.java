@@ -1,5 +1,6 @@
 package usts.pycro.pycslt.product.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -7,6 +8,7 @@ import com.mybatisflex.spring.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import usts.pycro.pycslt.model.bo.h5.ProductSkuBo;
+import usts.pycro.pycslt.model.bo.product.SkuSaleBo;
 import usts.pycro.pycslt.model.entity.base.BaseEntity;
 import usts.pycro.pycslt.model.entity.product.Product;
 import usts.pycro.pycslt.model.entity.product.ProductDetails;
@@ -70,6 +72,25 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                 .and(PRODUCT.CATEGORY3_ID.eq(productSkuBo.getCategory3Id()))
                 .orderBy(orderStd));
         return new PageInfo<>(productSkus);
+    }
+
+    /**
+     * 更新商品sku销量
+     *
+     * @param skuSaleBoList
+     * @return
+     */
+    @Override
+    public Boolean updateSkuSaleNum(List<SkuSaleBo> skuSaleBoList) {
+        if (CollectionUtil.isEmpty(skuSaleBoList)) {
+            return false;
+        }
+        skuSaleBoList.forEach(bo -> updateChain()
+                .set(ProductSku::getSaleNum, "saleNum + ${bo.getNum()}")
+                .set(ProductSku::getStockNum, "stockNum - ${bo.getNum()}")
+                .set(ProductSku::getUpdateTime, "now()")
+                .where(PRODUCT_SKU.ID.eq(bo.getSkuId())));
+        return true;
     }
 
     /**

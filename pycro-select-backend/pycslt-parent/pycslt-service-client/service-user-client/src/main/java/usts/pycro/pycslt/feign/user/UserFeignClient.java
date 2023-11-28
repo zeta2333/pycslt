@@ -14,5 +14,5 @@ import usts.pycro.pycslt.model.entity.user.UserAddress;
 public interface UserFeignClient {
 
     @GetMapping("/api/user/userAddress/getUserAddress/{id}")
-    UserAddress getUserAddress(@PathVariable Long id);
+    UserAddress getUserAddress(@PathVariable("id") Long id);
 }

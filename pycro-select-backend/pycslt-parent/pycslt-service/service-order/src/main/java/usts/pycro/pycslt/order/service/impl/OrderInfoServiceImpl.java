@@ -31,6 +31,7 @@ import usts.pycro.pycslt.utils.AuthContextUtil;
 
 import java.math.BigDecimal;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -91,6 +92,43 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         tradeVo.setOrderItemList(orderItems);
         tradeVo.setTotalAmount(totalAmount);
         return tradeVo;
+    }
+
+    /**
+     * 更新订单状态
+     *
+     * @param orderNo
+     * @param orderStatus
+     */
+    @Override
+    public void updateOrderStatus(String orderNo, Integer orderStatus) {
+        updateChain()
+                .set(ORDER_INFO.ORDER_STATUS, orderStatus)
+                .set(ORDER_INFO.PAYMENT_TIME, new Date())
+                .set(ORDER_INFO.PAY_TYPE, PayType.ALIPAY.getCode())
+                .where(ORDER_INFO.ORDER_NO.eq(orderNo))
+                .update();
+    }
+
+    /**
+     * 根据订单编号获取订单信息
+     *
+     * @param orderNo
+     * @return
+     */
+    @Override
+    public OrderInfo getByOrderNo(String orderNo) {
+        // 根据orderNo获取orderInfo
+        OrderInfo orderInfo = getOne(query()
+                .where(ORDER_INFO.ORDER_NO.eq(orderNo)));
+        // 根据orderId获取orderItem
+        List<OrderItem> orderItems = orderItemService.list(query()
+                .select(ORDER_ITEM.DEFAULT_COLUMNS)
+                .from(ORDER_ITEM)
+                .where(ORDER_ITEM.ORDER_ID.eq(orderInfo.getId()))
+                .orderBy(ORDER_ITEM.ID.desc()));
+        orderInfo.setOrderItemList(orderItems);
+        return orderInfo;
     }
 
     /**

@@ -54,12 +54,12 @@ public class CodeGen {
 
         // 设置根包
         globalConfig.getPackageConfig()
-                .setSourceDir("E:\\Project\\尚品甄选\\workspace\\pycro-select-backend\\pycslt-parent\\pycslt-service\\service-order\\src\\main\\java")
-                .setBasePackage("usts.pycro.pycslt.order");
+                .setSourceDir("E:\\Project\\尚品甄选\\workspace\\pycro-select-backend\\pycslt-parent\\pycslt-service\\service-pay\\src\\main\\java")
+                .setBasePackage("usts.pycro.pycslt.pay");
 
         // 设置表前缀和只生成哪些表，setGenerateTable 未配置时，生成所有表
         globalConfig.getStrategyConfig()
-                .setGenerateTable("order_item", "order_log");
+                .setGenerateTable("payment_info");
 
 
         // 设置生成 entity 并启用 Lombok
