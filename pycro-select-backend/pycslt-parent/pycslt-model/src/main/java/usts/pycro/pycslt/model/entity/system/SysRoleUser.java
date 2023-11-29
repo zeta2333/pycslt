@@ -1,7 +1,7 @@
 package usts.pycro.pycslt.model.entity.system;
 
-import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 import lombok.Data;
+import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 
 @Data
 public class SysRoleUser extends BaseLogicEntity {

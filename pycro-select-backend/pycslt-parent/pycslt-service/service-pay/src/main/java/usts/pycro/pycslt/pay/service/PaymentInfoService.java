@@ -14,6 +14,7 @@ import java.util.Map;
 public interface PaymentInfoService extends IService<PaymentInfo> {
     /**
      * 保存支付信息
+     *
      * @param orderNo
      * @return
      */
@@ -22,6 +23,7 @@ public interface PaymentInfoService extends IService<PaymentInfo> {
 
     /**
      * 支付完成，更新状态
+     *
      * @param paramMap
      */
     void updatePaymentStatus(Map<String, String> paramMap);

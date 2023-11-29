@@ -10,10 +10,11 @@ import java.util.List;
  * @version 1.0
  * 2023-11-20 11:58
  */
-public interface ProductSkuService  extends IService<ProductSku> {
+public interface ProductSkuService extends IService<ProductSku> {
 
     /**
      * 根据销量排序，获取前10条记录
+     *
      * @return
      */
     List<ProductSku> selectProductBySale();

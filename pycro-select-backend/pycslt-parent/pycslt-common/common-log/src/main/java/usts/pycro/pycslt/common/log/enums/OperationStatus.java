@@ -10,8 +10,7 @@ import lombok.Getter;
 @Getter
 public enum OperationStatus {
     NORMAL(0, "正常"),
-    ABNORMAL(1, "异常")
-    ;
+    ABNORMAL(1, "异常");
 
     private final Integer code;
     private final String value;

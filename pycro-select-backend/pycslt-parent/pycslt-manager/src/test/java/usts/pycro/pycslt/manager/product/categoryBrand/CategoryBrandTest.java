@@ -30,8 +30,9 @@ public class CategoryBrandTest {
                 service.pageQuery(1, 10, categoryBrandBo);
         System.out.println(categoryBrandPage);
     }
+
     @Test
-    public void testFindBrandByCategoryId(){
+    public void testFindBrandByCategoryId() {
         List<Brand> brandByCategoryId = service.findBrandByCategoryId(3L);
         brandByCategoryId.forEach(System.out::println);
     }

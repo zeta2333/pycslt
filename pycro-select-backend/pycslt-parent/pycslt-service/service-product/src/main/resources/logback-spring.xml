@@ -4,7 +4,8 @@
     <contextName>logback</contextName>
 
     <!-- 日志的输出目录 -->
-    <property name="log.path" value="E:\Project\尚品甄选\workspace\pycro-select-backend\pycslt-parent\pycslt-service\service-product\logs" />
+    <property name="log.path"
+              value="E:\Project\尚品甄选\workspace\pycro-select-backend\pycslt-parent\pycslt-service\service-product\logs"/>
 
     <!--控制台日志格式：彩色日志-->
     <!-- magenta:洋红 -->
@@ -12,13 +13,14 @@
     <!-- cyan:青色 -->
     <!-- white:白色 -->
     <!-- magenta:洋红 -->
-    <property name="CONSOLE_LOG_PATTERN" value="%yellow(%date{yyyy-MM-dd HH:mm:ss}) %highlight([%-5level]) %green(%logger) %msg%n"/>
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%yellow(%date{yyyy-MM-dd HH:mm:ss}) %highlight([%-5level]) %green(%logger) %msg%n"/>
 
     <!--文件日志格式-->
-    <property name="FILE_LOG_PATTERN" value="%date{yyyy-MM-dd HH:mm:ss} [%-5level] %thread %file:%line %logger %msg%n" />
+    <property name="FILE_LOG_PATTERN" value="%date{yyyy-MM-dd HH:mm:ss} [%-5level] %thread %file:%line %logger %msg%n"/>
 
     <!--编码-->
-    <property name="ENCODING" value="UTF-8" />
+    <property name="ENCODING" value="UTF-8"/>
 
     <!-- 控制台日志 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
@@ -45,11 +47,11 @@
     <!-- 开发环境 -->
     <springProfile name="dev">
         <!-- usts.pycro日志记录器：业务程序INFO级别  -->
-        <logger name="usts.pycro" level="INFO" />
+        <logger name="usts.pycro" level="INFO"/>
         <!-- 根日志记录器：INFO级别  -->
         <root level="INFO">
-            <appender-ref ref="CONSOLE" />
-            <appender-ref ref="FILE" />
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="FILE"/>
         </root>
     </springProfile>
 

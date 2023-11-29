@@ -14,6 +14,7 @@ public interface OrderInfoService extends IService<OrderInfo> {
 
     /**
      * 根据日期查询订单统计信息
+     *
      * @param targetDate
      * @return
      */

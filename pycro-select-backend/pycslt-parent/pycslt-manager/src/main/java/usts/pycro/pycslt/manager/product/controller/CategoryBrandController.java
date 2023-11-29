@@ -27,6 +27,7 @@ public class CategoryBrandController {
 
     /**
      * 根据分类id查询对应的品牌
+     *
      * @param categoryId
      * @return
      */

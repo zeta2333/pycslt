@@ -16,6 +16,7 @@ public interface BrandService extends IService<Brand> {
 
     /**
      * 分页查询
+     *
      * @param pageNum
      * @param pageSize
      * @return
@@ -24,6 +25,7 @@ public interface BrandService extends IService<Brand> {
 
     /**
      * 查询所有
+     *
      * @return
      */
     List<Brand> findAll();

@@ -17,6 +17,7 @@ public interface CategoryService extends IService<Category> {
 
     /**
      * 根据parentId查询列表
+     *
      * @param parentId
      * @return
      */
@@ -24,12 +25,14 @@ public interface CategoryService extends IService<Category> {
 
     /**
      * 导出
+     *
      * @param response
      */
     void exportData(HttpServletResponse response);
 
     /**
      * 导入
+     *
      * @param file
      */
     void importData(MultipartFile file);

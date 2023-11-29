@@ -35,7 +35,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
      * @return
      */
     @Override
-    @Cacheable(value = "category",key = "'all'")
+    @Cacheable(value = "category", key = "'all'")
     public List<Category> findCategoryTree() {
         return mapper.selectListWithRelationsByQuery(query()
                 .where(CATEGORY.PARENT_ID.eq(0)));

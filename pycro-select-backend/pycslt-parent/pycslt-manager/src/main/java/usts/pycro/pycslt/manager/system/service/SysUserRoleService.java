@@ -15,6 +15,7 @@ public interface SysUserRoleService extends IService<SysUserRole> {
 
     /**
      * 根据userId获取已分配的roleId
+     *
      * @param userId
      * @return
      */

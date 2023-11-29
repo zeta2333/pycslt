@@ -18,6 +18,7 @@ public class GlobalExceptionHandler {
 
     /**
      * 全局异常处理
+     *
      * @param e
      * @return
      */
@@ -29,6 +30,7 @@ public class GlobalExceptionHandler {
 
     /**
      * 自定义异常处理
+     *
      * @param e
      * @return
      */

@@ -14,6 +14,7 @@ public interface BrandService extends IService<Brand> {
 
     /**
      * 获取全部品牌
+     *
      * @return
      */
     List<Brand> findAll();

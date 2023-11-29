@@ -16,7 +16,7 @@ public class APTest {
     private ApplicationProperties properties;
 
     @Test
-    public void testGetProperties(){
+    public void testGetProperties() {
         // List<String> noAuthUrls = properties.getAuth().getNoAuthUrls();
         // noAuthUrls.forEach(System.out::println);
         ApplicationProperties.Minio minio = properties.getMinio();

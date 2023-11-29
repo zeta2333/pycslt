@@ -7,10 +7,10 @@ import lombok.Data;
 @Schema(description = "用户类")
 public class UserInfoVo {
 
-   @Schema(description = "昵称")
-   private String nickName;
+    @Schema(description = "昵称")
+    private String nickName;
 
-   @Schema(description = "头像")
-   private String avatar;
+    @Schema(description = "头像")
+    private String avatar;
 
 }

@@ -33,8 +33,9 @@ public class SysUserServiceTest {
         Page<SysUser> sysUserPage = sysUserService.pageQuery(page, sysUserBo);
         System.out.println(sysUserPage);
     }
+
     @Test
-    public void testDelete(){
+    public void testDelete() {
         sysUserRoleService.remove(QueryWrapper.create()
                 .where(SYS_USER_ROLE.USER_ID.eq(1)));
     }

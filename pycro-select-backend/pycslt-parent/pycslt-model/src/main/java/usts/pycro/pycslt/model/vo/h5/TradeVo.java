@@ -1,8 +1,8 @@
 package usts.pycro.pycslt.model.vo.h5;
 
-import usts.pycro.pycslt.model.entity.order.OrderItem;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import usts.pycro.pycslt.model.entity.order.OrderItem;
 
 import java.math.BigDecimal;
 import java.util.List;

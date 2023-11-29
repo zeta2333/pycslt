@@ -11,8 +11,7 @@ import lombok.Getter;
 public enum ProductStatusEnum {
     INIT(0, "初始值"),
     ON_SHELF(1, "上架"),
-    OFF_SHELF(-1, "自主下架")
-    ;
+    OFF_SHELF(-1, "自主下架");
 
 
     private final Integer code;

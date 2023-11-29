@@ -15,6 +15,7 @@ public interface SysRoleMenuService extends IService<SysRoleMenu> {
 
     /**
      * 查询角色已分配的所有菜单id
+     *
      * @param roleId
      * @return
      */

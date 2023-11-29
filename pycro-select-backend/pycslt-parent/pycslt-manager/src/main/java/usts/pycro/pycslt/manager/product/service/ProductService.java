@@ -17,6 +17,7 @@ public interface ProductService extends IService<Product> {
 
     /**
      * 条件分页查询
+     *
      * @param pageNum
      * @param pageSize
      * @param productBo
@@ -26,12 +27,14 @@ public interface ProductService extends IService<Product> {
 
     /**
      * 添加
+     *
      * @param product
      */
     void add(Product product);
 
     /**
      * 根据id获取
+     *
      * @param id
      * @return
      */
@@ -39,18 +42,21 @@ public interface ProductService extends IService<Product> {
 
     /**
      * 修改
+     *
      * @param product
      */
     void updateProductById(Product product);
 
     /**
      * 根据id删除
+     *
      * @param productId
      */
     void deleteById(Serializable productId);
 
     /**
      * 商品审核
+     *
      * @param id
      * @param auditStatus
      */
@@ -58,6 +64,7 @@ public interface ProductService extends IService<Product> {
 
     /**
      * 商品上下架
+     *
      * @param id
      * @param status
      */

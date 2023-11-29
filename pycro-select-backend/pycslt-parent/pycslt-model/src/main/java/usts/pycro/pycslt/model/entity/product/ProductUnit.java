@@ -10,7 +10,7 @@ import usts.pycro.pycslt.model.entity.base.BaseLogicEntity;
 @Table("product_unit")
 public class ProductUnit extends BaseLogicEntity {
 
-	@Schema(description = "名称")
-	private String name;
+    @Schema(description = "名称")
+    private String name;
 
 }

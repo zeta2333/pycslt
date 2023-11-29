@@ -16,24 +16,28 @@ public interface SysMenuService extends IService<SysMenu> {
 
     /**
      * 查询所有菜单，递归层级返回
+     *
      * @return
      */
     List<SysMenu> findNodes();
 
     /**
      * 删除
+     *
      * @param id
      */
     void removeMenuById(Long id);
 
     /**
      * 查询用户拥有的菜单
+     *
      * @return
      */
     List<SysMenuVo> findMenusByUserId();
 
     /**
      * 添加菜单
+     *
      * @param sysMenu
      */
     void saveMenu(SysMenu sysMenu);
