@@ -111,8 +111,8 @@
             <groupId>com.mybatis-flex</groupId>
             <artifactId>mybatis-flex-codegen</artifactId>
             <version>${mybatis-flex.version}</version>
+            <scope>provided</scope>
         </dependency>
-
 
         <!-- manifold-science -->
         <dependency>
@@ -167,11 +167,6 @@
                             <artifactId>manifold-strings</artifactId>
                             <version>${manifold.version}</version>
                         </path>
-                        <!-- <path> -->
-                        <!--     <groupId>systems.manifold</groupId> -->
-                        <!--     <artifactId>manifold-ext</artifactId> -->
-                        <!--     <version>${manifold.version}</version> -->
-                        <!-- </path> -->
                         <path>
                             <groupId>systems.manifold</groupId>
                             <artifactId>manifold-templates</artifactId>

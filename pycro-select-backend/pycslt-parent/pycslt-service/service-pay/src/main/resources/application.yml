@@ -1,16 +1,14 @@
 spring:
-  profiles:
-    active: dev
-#spring:
-#  cloud:
-#    nacos:
-#      config:
-#        server-addr: ${app.nacos.host}:${app.nacos.port}
-#  config:
-#    import:
-#      - nacos:service-pay-dev.yml
-#
-#app:
-#  nacos:
-#    host: 192.168.73.128
-#    port: 8848
+  cloud:
+    nacos:
+      config:
+        server-addr: ${app.nacos.host}:${app.nacos.port}
+  config:
+    import:
+      - nacos:service-pay-dev.yml
+      - nacos:application-alipay-dev.yml
+
+app:
+  nacos:
+    host: 192.168.73.128
+    port: 8848
