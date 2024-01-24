@@ -44,6 +44,7 @@ app:
     dbname: db_pycslt
     username: root
     password: 12345678
+    abcd: 1234
   redis:
     host: 192.168.73.128
     port: 6379
